@@ -7,51 +7,23 @@
     tabindex="0"
     @keydown.enter="$emit('open')"
   >
-    <!-- Image Area -->
-    <div class="p-3 pb-0">
-      <div class="relative w-full overflow-hidden rounded-sm" style="aspect-ratio: 4/3;">
+    <!-- Generated Cover (always shown — no raw screenshots) -->
+    <div class="generated-cover flex flex-col items-center justify-center text-center px-5 pt-8 pb-6" :style="coverStyle">
+      <!-- Decorative dot grid -->
+      <div class="dots-grid" aria-hidden="true"></div>
 
-        <!-- If real screenshot: show image -->
-        <img
-          v-if="!isPlaceholder"
-          :src="project.images[0]"
-          :alt="project.title"
-          class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
-          loading="lazy"
-        />
+      <!-- Project Title -->
+      <h4 class="cover-title mb-3">{{ project.title }}</h4>
 
-        <!-- If placeholder: show a beautiful generated gradient cover -->
-        <div
-          v-else
-          class="generated-cover w-full h-full flex flex-col items-center justify-center text-center p-4"
-          :style="coverStyle"
-        >
-          <!-- Decorative dots -->
-          <div class="dots-grid" aria-hidden="true"></div>
+      <!-- Gradient underline -->
+      <div class="cover-line"></div>
 
-          <!-- Project Title -->
-          <h4 class="cover-title">{{ project.title }}</h4>
-
-          <!-- Decorative underline -->
-          <div class="cover-line" :style="lineStyle"></div>
-
-          <!-- Type chip -->
-          <span class="cover-chip">{{ shortType }}</span>
-        </div>
-
-        <!-- Hover overlay -->
-        <div class="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center"
-          :style="`background: ${hoverOverlay};`"
-        >
-          <span class="pill-btn pointer-events-none text-sm" style="border-color: var(--bg-cream)">
-            View Details
-          </span>
-        </div>
-      </div>
+      <!-- Type chip -->
+      <span class="cover-chip mt-3">{{ shortType }}</span>
     </div>
 
     <!-- Content Area -->
-    <div class="p-5 pt-4 flex-1 flex flex-col gap-2">
+    <div class="px-5 pt-4 pb-5 flex-1 flex flex-col gap-2">
       <h3 class="card-title leading-snug">
         {{ project.title }}
       </h3>
@@ -60,9 +32,18 @@
         {{ project.type }}
       </span>
 
-      <p class="font-sans text-sm leading-relaxed line-clamp-3 mt-1" style="color: var(--text-muted)">
+      <p class="font-sans text-sm leading-relaxed line-clamp-3 mt-1 flex-1" style="color: var(--text-muted)">
         {{ project.summary }}
       </p>
+
+      <!-- View Details Button — always visible at bottom -->
+      <button
+        class="view-btn mt-3 w-full text-sm font-bold py-2 px-4 rounded-full transition-all duration-300"
+        :style="btnStyle"
+        @click.stop="$emit('open')"
+      >
+        View Details
+      </button>
     </div>
   </article>
 </template>
@@ -78,18 +59,14 @@ defineEmits(['open'])
 
 // ─── Pastel colour palette cycling ────────────────────────────────────────────
 const palette = [
-  { border: '#c1e1f5', bg: '#eaf6ff', grad: 'linear-gradient(135deg, #c1e1f5 0%, #dce8ff 100%)', hover: 'rgba(193,225,245,0.45)', badge: '#c1e1f5', badgeText: '#2a5e7a' },
-  { border: '#ffb6c1', bg: '#fff0f2', grad: 'linear-gradient(135deg, #ffb6c1 0%, #ffe0e6 100%)', hover: 'rgba(255,182,193,0.45)', badge: '#ffb6c1', badgeText: '#7a2a35' },
-  { border: '#d5b8f5', bg: '#f5eeff', grad: 'linear-gradient(135deg, #d5b8f5 0%, #eed9ff 100%)', hover: 'rgba(213,184,245,0.45)', badge: '#d5b8f5', badgeText: '#4a2a7a' },
-  { border: '#b8dfc8', bg: '#e8f7ed', grad: 'linear-gradient(135deg, #b8dfc8 0%, #d5f0e0 100%)', hover: 'rgba(184,223,200,0.45)', badge: '#b8dfc8', badgeText: '#1a5c34' },
-  { border: '#ffd6a5', bg: '#fff6e8', grad: 'linear-gradient(135deg, #ffd6a5 0%, #ffead0 100%)', hover: 'rgba(255,214,165,0.45)', badge: '#ffd6a5', badgeText: '#7a4a10' },
+  { border: '#a8d5f5', bg: '#deeefb', gradFrom: '#c8e8f8', gradTo: '#e8f4fd', badge: '#c1e1f5', badgeText: '#1a5878', btn: 'rgba(168,213,245,0.3)', btnBorder: '#7cb8e0', btnText: '#1a5878' },
+  { border: '#f5a8b8', bg: '#fce8ed', gradFrom: '#fbc8d5', gradTo: '#fde8ed', badge: '#ffb6c1', badgeText: '#7a1a2c', btn: 'rgba(245,168,184,0.3)', btnBorder: '#e07890', btnText: '#7a1a2c' },
+  { border: '#c8a8f5', bg: '#ede8fc', gradFrom: '#d8c8f8', gradTo: '#ede8fc', badge: '#d5b8f5', badgeText: '#3a1a78', btn: 'rgba(200,168,245,0.3)', btnBorder: '#9870d8', btnText: '#3a1a78' },
+  { border: '#a8d8c0', bg: '#e0f5eb', gradFrom: '#c0e8d4', gradTo: '#daf5ea', badge: '#b8dfc8', badgeText: '#1a5c34', btn: 'rgba(168,216,192,0.3)', btnBorder: '#70b890', btnText: '#1a5c34' },
+  { border: '#f5cda8', bg: '#fceee0', gradFrom: '#f8ddc0', gradTo: '#fceee0', badge: '#ffd6a5', badgeText: '#7a4410', btn: 'rgba(245,205,168,0.3)', btnBorder: '#d8986c', btnText: '#7a4410' },
 ]
 
 const color = computed(() => palette[props.index % palette.length])
-
-const isPlaceholder = computed(() => 
-  !props.project.images[0] || props.project.images[0].includes('placehold.co')
-)
 
 const shortType = computed(() => {
   const t = props.project.type
@@ -98,30 +75,25 @@ const shortType = computed(() => {
   if (t.includes('Freelance')) return 'Freelance'
   if (t.includes('Thesis')) return 'Thesis'
   if (t.includes('Internship')) return 'Internship'
+  if (t.includes('IoT') || t.includes('Class')) return 'Class Project'
+  if (t.includes('Initiative')) return 'Initiative'
   return t.split(' ')[0]
 })
 
 const frameStyle = computed(() => ({
   backgroundColor: 'var(--bg-cream)',
-  border: `2.5px solid ${color.value.border}`,
-  borderRadius: '10px',
-  boxShadow: `0 4px 20px ${color.value.border}80`,
-  marginTop: '12px',
-  transform: props.index % 2 === 0 ? 'rotate(0.6deg)' : 'rotate(-0.6deg)',
+  border: `2px solid ${color.value.border}`,
+  borderRadius: '16px',
+  boxShadow: `0 4px 20px ${color.value.border}70`,
+  marginTop: '8px',
 }))
 
 const coverStyle = computed(() => ({
-  background: `linear-gradient(145deg, ${color.value.bg} 0%, #fffcf8 100%)`,
+  background: `linear-gradient(145deg, ${color.value.gradFrom} 0%, ${color.value.gradTo} 100%)`,
+  borderRadius: '14px 14px 0 0',
   position: 'relative',
   overflow: 'hidden',
-}))
-
-const lineStyle = computed(() => ({
-  width: '48px',
-  height: '3px',
-  borderRadius: '99px',
-  background: `linear-gradient(90deg, #c1e1f5, #f497a9)`,
-  margin: '10px auto 12px',
+  minHeight: '170px',
 }))
 
 const badgeStyle = computed(() => ({
@@ -129,7 +101,12 @@ const badgeStyle = computed(() => ({
   color: color.value.badgeText,
 }))
 
-const hoverOverlay = computed(() => color.value.hover)
+const btnStyle = computed(() => ({
+  backgroundColor: color.value.btn,
+  border: `1.5px solid ${color.value.btnBorder}`,
+  color: color.value.btnText,
+  fontFamily: "'Nunito', sans-serif",
+}))
 </script>
 
 <style scoped>
@@ -137,31 +114,26 @@ const hoverOverlay = computed(() => color.value.hover)
   transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
 .card-frame:hover {
-  transform: rotate(0deg) translateY(-4px) !important;
-  box-shadow: 0 10px 28px rgba(74, 44, 44, 0.10) !important;
+  transform: translateY(-5px) !important;
+  box-shadow: 0 14px 32px rgba(100, 100, 180, 0.13) !important;
 }
 
-/* Generated cover styles */
-.generated-cover {
-  position: relative;
-}
-
-/* Decorative dot grid in background */
+/* Decorative dot grid in cover */
 .dots-grid {
   position: absolute;
   inset: 0;
-  background-image: radial-gradient(circle, rgba(193,225,245,0.5) 1.5px, transparent 1.5px),
-                    radial-gradient(circle, rgba(255,182,193,0.4) 1.5px, transparent 1.5px);
-  background-size: 20px 20px, 40px 40px;
-  background-position: 0 0, 10px 10px;
+  background-image:
+    radial-gradient(circle, rgba(150,150,220,0.18) 1.5px, transparent 1.5px);
+  background-size: 18px 18px;
   pointer-events: none;
+  z-index: 0;
 }
 
 .cover-title {
   font-family: 'Nunito', sans-serif;
-  font-size: 1.2rem;
+  font-size: 1.15rem;
   font-weight: 900;
-  line-height: 1.3;
+  line-height: 1.35;
   background: linear-gradient(135deg, #5ea8d4 0%, #c460a0 100%);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
@@ -171,28 +143,43 @@ const hoverOverlay = computed(() => color.value.hover)
   letter-spacing: -0.01em;
 }
 
-.cover-chip {
-  font-family: 'Nunito', sans-serif;
-  font-size: 0.65rem;
-  font-weight: 800;
-  letter-spacing: 0.08em;
-  text-transform: uppercase;
-  background: linear-gradient(135deg, #c1e1f5 0%, #ffb6c1 100%);
-  color: #4a2c2c;
-  padding: 3px 10px;
+.cover-line {
+  width: 44px;
+  height: 3px;
   border-radius: 99px;
+  background: linear-gradient(90deg, #a8d4f4, #f497a9);
   position: relative;
   z-index: 1;
 }
 
-/* Card title using Nunito */
+.cover-chip {
+  font-family: 'Nunito', sans-serif;
+  font-size: 0.65rem;
+  font-weight: 800;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  background: rgba(255, 255, 255, 0.65);
+  color: #5a3b6a;
+  padding: 3px 12px;
+  border-radius: 99px;
+  position: relative;
+  z-index: 1;
+  backdrop-filter: blur(4px);
+  border: 1px solid rgba(200, 180, 240, 0.4);
+}
+
 .card-title {
   font-family: 'Nunito', sans-serif;
   font-weight: 800;
-  font-size: 1rem;
+  font-size: 0.95rem;
   background: linear-gradient(135deg, #4a7ab5 0%, #c450a0 100%);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
+}
+
+.view-btn:hover {
+  filter: brightness(0.92);
+  transform: translateY(-1px);
 }
 </style>
