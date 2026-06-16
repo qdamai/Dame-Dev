@@ -8,12 +8,12 @@
     @keydown.enter="$emit('open')"
   >
     <!-- Generated Cover (always shown — no raw screenshots) -->
-    <div class="generated-cover flex flex-col items-center justify-center text-center px-5 pt-8 pb-6" :style="coverStyle">
-      <!-- Decorative dot grid -->
-      <div class="dots-grid" aria-hidden="true"></div>
+    <div class="generated-cover flex flex-col items-center justify-center text-center p-6 relative" :style="coverStyle">
+      <!-- Inner white dashed border -->
+      <div class="absolute inset-3 border-2 border-dashed border-white opacity-70 rounded-lg pointer-events-none"></div>
 
       <!-- Project Title -->
-      <h4 class="cover-title mb-3">{{ project.title }}</h4>
+      <h4 class="cover-title mb-2">{{ project.title }}</h4>
 
       <!-- Gradient underline -->
       <div class="cover-line"></div>
@@ -57,13 +57,13 @@ const props = defineProps({
 })
 defineEmits(['open'])
 
-// ─── Pastel colour palette cycling ────────────────────────────────────────────
+// ─── Solid Pastel colour palette ────────────────────────────────────────────
 const palette = [
-  { border: '#a8d5f5', bg: '#deeefb', gradFrom: '#c8e8f8', gradTo: '#e8f4fd', badge: '#c1e1f5', badgeText: '#1a5878', btn: 'rgba(168,213,245,0.3)', btnBorder: '#7cb8e0', btnText: '#1a5878' },
-  { border: '#f5a8b8', bg: '#fce8ed', gradFrom: '#fbc8d5', gradTo: '#fde8ed', badge: '#ffb6c1', badgeText: '#7a1a2c', btn: 'rgba(245,168,184,0.3)', btnBorder: '#e07890', btnText: '#7a1a2c' },
-  { border: '#c8a8f5', bg: '#ede8fc', gradFrom: '#d8c8f8', gradTo: '#ede8fc', badge: '#d5b8f5', badgeText: '#3a1a78', btn: 'rgba(200,168,245,0.3)', btnBorder: '#9870d8', btnText: '#3a1a78' },
-  { border: '#a8d8c0', bg: '#e0f5eb', gradFrom: '#c0e8d4', gradTo: '#daf5ea', badge: '#b8dfc8', badgeText: '#1a5c34', btn: 'rgba(168,216,192,0.3)', btnBorder: '#70b890', btnText: '#1a5c34' },
-  { border: '#f5cda8', bg: '#fceee0', gradFrom: '#f8ddc0', gradTo: '#fceee0', badge: '#ffd6a5', badgeText: '#7a4410', btn: 'rgba(245,205,168,0.3)', btnBorder: '#d8986c', btnText: '#7a4410' },
+  { border: '#bce0f9', coverBg: '#d6efff', badge: '#bce0f9', badgeText: '#1a5878', btn: '#f0f8ff', btnBorder: '#bce0f9', btnText: '#1a5878' }, // Blue
+  { border: '#ffcdd2', coverBg: '#ffe4e8', badge: '#ffcdd2', badgeText: '#7a1a2c', btn: '#fff0f2', btnBorder: '#ffcdd2', btnText: '#7a1a2c' }, // Pink
+  { border: '#e1bee7', coverBg: '#f3e5f5', badge: '#e1bee7', badgeText: '#3a1a78', btn: '#fcf4ff', btnBorder: '#e1bee7', btnText: '#3a1a78' }, // Purple
+  { border: '#c8e6c9', coverBg: '#e8f5e9', badge: '#c8e6c9', badgeText: '#1a5c34', btn: '#f0fff4', btnBorder: '#c8e6c9', btnText: '#1a5c34' }, // Green
+  { border: '#ffe0b2', coverBg: '#fff3e0', badge: '#ffe0b2', badgeText: '#7a4410', btn: '#fffaf0', btnBorder: '#ffe0b2', btnText: '#7a4410' }, // Peach
 ]
 
 const color = computed(() => palette[props.index % palette.length])
@@ -89,11 +89,12 @@ const frameStyle = computed(() => ({
 }))
 
 const coverStyle = computed(() => ({
-  background: `linear-gradient(145deg, ${color.value.gradFrom} 0%, ${color.value.gradTo} 100%)`,
+  backgroundColor: color.value.coverBg,
   borderRadius: '14px 14px 0 0',
   position: 'relative',
   overflow: 'hidden',
   minHeight: '170px',
+  borderBottom: `2px solid ${color.value.border}`,
 }))
 
 const badgeStyle = computed(() => ({
@@ -118,16 +119,7 @@ const btnStyle = computed(() => ({
   box-shadow: 0 14px 32px rgba(100, 100, 180, 0.13) !important;
 }
 
-/* Decorative dot grid in cover */
-.dots-grid {
-  position: absolute;
-  inset: 0;
-  background-image:
-    radial-gradient(circle, rgba(150,150,220,0.18) 1.5px, transparent 1.5px);
-  background-size: 18px 18px;
-  pointer-events: none;
-  z-index: 0;
-}
+
 
 .cover-title {
   font-family: 'Nunito', sans-serif;
