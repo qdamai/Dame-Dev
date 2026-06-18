@@ -19,8 +19,8 @@
     </div>
     
     <!-- Center Icon -->
-    <div class="text-4xl mt-12 mb-4 transition-transform duration-300 group-hover:scale-110">
-      {{ getIcon(project.id) }}
+    <div class="mt-12 mb-4 transition-transform duration-300 group-hover:scale-110">
+      <Icon :icon="iconData.name" :color="iconData.color" width="48" height="48" />
     </div>
 
     <!-- Title -->
@@ -37,6 +37,7 @@
 
 <script setup>
 import { computed } from 'vue'
+import { Icon } from '@iconify/vue'
 
 const props = defineProps({
   project: { type: Object, required: true },
@@ -44,23 +45,23 @@ const props = defineProps({
 })
 defineEmits(['open'])
 
-// Emojis for projects
-const emojis = {
-  lostlink: '🔗',
-  pawpaw: '🐾',
-  helpdesk: '🎟️',
-  photostudio: '📸',
-  forestry: '🌲',
-  keyboard: '⌨️',
-  ecogoals: '🌍',
-  jurnal: '📚',
-  santiago: '🎨',
-  arkhavian: '🎭'
+// Cute icons using Iconify (Solar/MingCute)
+const projectIcons = {
+  lostlink: { name: 'solar:link-bold-duotone', color: '#60A5FA' }, // Blue
+  pawpaw: { name: 'solar:cat-bold-duotone', color: '#F472B6' }, // Pink
+  helpdesk: { name: 'solar:ticket-bold-duotone', color: '#FBBF24' }, // Yellow
+  photostudio: { name: 'solar:camera-bold-duotone', color: '#A78BFA' }, // Purple
+  forestry: { name: 'solar:leaf-bold-duotone', color: '#34D399' }, // Green
+  keyboard: { name: 'solar:keyboard-bold-duotone', color: '#F87171' }, // Red
+  ecogoals: { name: 'solar:globe-bold-duotone', color: '#10B981' }, // Mint
+  jurnal: { name: 'solar:book-bookmark-bold-duotone', color: '#38BDF8' }, // Light Blue
+  santiago: { name: 'solar:palette-bold-duotone', color: '#F59E0B' }, // Orange
+  arkhavian: { name: 'solar:ghost-bold-duotone', color: '#818CF8' } // Indigo
 }
 
-function getIcon(id) {
-  return emojis[id] || '✨'
-}
+const iconData = computed(() => {
+  return projectIcons[props.project.id] || { name: 'solar:star-bold-duotone', color: '#FCD34D' }
+})
 
 const shortTypeCategory = computed(() => {
   const t = props.project.type.toLowerCase()
