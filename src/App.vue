@@ -1,13 +1,20 @@
 <template>
   <div id="scrapbook-layout" class="min-h-screen flex flex-col bg-[#fff8eb]">
 
-    <!-- Floating Pill Navigation -->
-    <header class="fixed top-4 left-0 right-0 z-50 flex justify-center px-4">
-      <nav class="bg-[#fff8eb] rounded-full px-6 py-3 shadow-[4px_4px_0px_#1e3a8a] border-[3px] border-[#1e3a8a] flex items-center gap-6">
-        <span class="font-fredoka font-bold text-xl text-[#1e3a8a]">Damai</span>
-        <div class="h-5 w-[2px] bg-[#1e3a8a]/20 hidden sm:block"></div>
-        <router-link to="/" class="nav-link" active-class="nav-active">Web &amp; App</router-link>
-        <router-link to="/design" class="nav-link" active-class="nav-active">Design Gallery</router-link>
+    <!-- Full Width Navigation Bar -->
+    <header class="fixed top-0 left-0 right-0 z-50 bg-[#fff8eb] border-b-[4px] border-[#1e3a8a] h-20 flex items-center">
+      <nav class="max-w-5xl mx-auto w-full px-4 md:px-8 flex items-center justify-between">
+        <!-- Brand Logo -->
+        <router-link to="/" class="font-fredoka font-bold text-2xl text-[#1e3a8a] flex items-center gap-1.5 hover:scale-105 transition-transform">
+          <span>Damai</span>
+          <span class="text-[#e11d48]">✨</span>
+        </router-link>
+        
+        <!-- Navigation Links -->
+        <div class="flex items-center gap-2 md:gap-4">
+          <router-link to="/" class="nav-link" active-class="nav-active">Web &amp; App</router-link>
+          <router-link to="/design" class="nav-link" active-class="nav-active">Design Gallery</router-link>
+        </div>
       </nav>
     </header>
 
