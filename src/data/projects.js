@@ -112,5 +112,29 @@ export const projects = [
     link: 'https://layanan-jurnal.vercel.app',
     linkLabel: 'layanan-jurnal.vercel.app',
     images: getImagesFor('jurnal', 'Journal+Catalog')
+  },
+  {
+    id: 'santiago',
+    title: 'Custom Interactive Personal Profile',
+    summary: 'A bespoke, highly customized personal branding and interactive platform.',
+    type: 'Freelance Client Project',
+    role: 'Frontend Developer',
+    impact: 'Executed a highly specific design brief to create an engaging thematic experience.',
+    lessons: 'Improved skills in building highly customized UI components.',
+    link: 'https://santiago-sand.vercel.app',
+    linkLabel: 'santiago-sand.vercel.app',
+    images: getImagesFor('santiago', 'Santiago+Profile')
+  },
+  {
+    id: 'arkhavian',
+    title: 'Thematic Character Profile Booking',
+    summary: 'An interactive character profile and scheduling web application with rich custom styling.',
+    type: 'Freelance Client Project',
+    role: 'Frontend Developer',
+    impact: 'Provided a seamless digital experience for private personal service booking.',
+    lessons: 'Deepened understanding of thematic UI/UX implementation.',
+    link: 'https://arkhavian.vercel.app',
+    linkLabel: 'arkhavian.vercel.app',
+    images: getImagesFor('arkhavian', 'Arkhavian')
   }
 ]
