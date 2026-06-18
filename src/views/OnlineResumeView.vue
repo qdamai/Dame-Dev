@@ -19,7 +19,6 @@
         <Icon icon="solar:document-bold-duotone" class="text-[#1e293b]" width="36" height="36" />
         <div>
           <h2 class="font-pixel text-2xl md:text-3xl text-slate-800 uppercase tracking-wider leading-none">Online Resume</h2>
-          <p class="font-sans font-bold text-[10px] text-slate-700 tracking-wider uppercase mt-1">Y2K Scrapbook Interactive CV</p>
         </div>
       </div>
       <button
@@ -343,7 +342,7 @@
           GitHub: <a href="https://github.com/qdamai" target="_blank" class="text-slate-700 hover:underline">github.com/qdamai</a>
         </div>
         <div class="text-[10px] font-bold text-slate-400">
-          References available upon request. Generated on {{ currentDate }}
+          References available upon request.
         </div>
       </div>
 
@@ -359,11 +358,6 @@ import { jsPDF } from 'jspdf'
 import profilePhoto from '../assets/fotodamai/sidamai.jpeg'
 
 const isGeneratingPDF = ref(false)
-
-const currentDate = computed(() => {
-  const options = { year: 'numeric', month: 'long', day: 'numeric' }
-  return new Date().toLocaleDateString('en-US', options)
-})
 
 const techSkills = [
   'JavaScript', 'TypeScript', 'Python', 'Vue.js', 'React Native', 
@@ -433,7 +427,8 @@ async function downloadPDF() {
 
     const canvas = await html2canvas(element, {
       scale: 2, // High resolution for A4 quality
-      useCORS: true,
+      useCORS: false,
+      allowTaint: true,
       backgroundColor: '#FDFBF7',
       logging: false,
       windowWidth: 1024 // Set a stable container viewport width for A4 aspect ratio rendering
