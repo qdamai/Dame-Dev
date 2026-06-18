@@ -1,11 +1,11 @@
 <template>
-  <footer class="w-full bg-[#fce7ec] pt-16 pb-12 px-4 md:px-8 border-t-[4px] border-[#1e3a8a] relative z-10">
+  <footer class="w-full bg-[#ffd1dc] pt-16 pb-12 px-4 md:px-8 border-t-[4px] border-[#1e293b] relative z-10">
     <!-- Scalloped transition from whatever is above to Pink -->
     <div class="scalloped-top-pink" style="margin-top: -64px; margin-bottom: 48px;"></div>
 
     <div class="max-w-4xl mx-auto text-center">
-      <p class="font-fredoka text-3xl font-bold mb-1 text-[#1e3a8a]">Damai Puti Afifah</p>
-      <p class="font-quicksand font-bold text-base uppercase tracking-wider text-[#e11d48] mb-8">Frontend Developer &amp; Creative Design</p>
+      <p class="font-fredoka text-3xl font-bold mb-1 text-[#1e293b]">Damai Puti Afifah</p>
+      <p class="font-quicksand font-bold text-base uppercase tracking-wider text-[#e1959c] mb-8">Frontend Developer &amp; Creative Design</p>
 
       <!-- Contact links row -->
       <div class="flex flex-wrap justify-center gap-3 mb-8">
@@ -44,9 +44,9 @@
       </div>
 
       <!-- Divider line -->
-      <div class="h-[2px] bg-[#1e3a8a]/20 mb-6 mx-auto max-w-xs"></div>
+      <div class="h-[2px] bg-[#1e293b]/20 mb-6 mx-auto max-w-xs"></div>
 
-      <p class="text-xs font-quicksand font-bold tracking-wider text-[#1e3a8a]/70">
+      <p class="text-xs font-quicksand font-bold tracking-wider text-[#1e293b]/70">
         Built with Vue 3, Vite &amp; Tailwind CSS &nbsp;|&nbsp; &copy; {{ year }} All Rights Reserved
       </p>
     </div>

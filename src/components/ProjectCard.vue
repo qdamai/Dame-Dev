@@ -8,13 +8,13 @@
     @keydown.enter="$emit('open')"
   >
     <!-- Top Left -->
-    <div class="absolute top-3 left-3 text-left leading-tight text-[#8b1d24] font-bold text-[10px] tracking-widest uppercase">
+    <div class="absolute top-3 left-3 text-left leading-tight text-[#1e293b] font-bold text-[10px] tracking-widest uppercase font-pixel">
       <div>PRJ</div>
       <div class="mt-[2px]">{{ String(index + 1).padStart(2, '0') }}</div>
     </div>
     
     <!-- Top Right -->
-    <div class="absolute top-3 right-3 text-[#8b1d24] font-bold text-[10px] tracking-widest uppercase">
+    <div class="absolute top-3 right-3 text-[#1e293b] font-bold text-[10px] tracking-widest uppercase font-pixel">
       ({{ shortTypeCategory }})
     </div>
     
@@ -24,12 +24,12 @@
     </div>
 
     <!-- Title -->
-    <h3 class="text-[#8b1d24] font-semibold text-center text-sm px-6 mb-2 leading-snug">
-      <span class="border-b border-[#8b1d24]/30 pb-[2px]">{{ project.title }}</span>
+    <h3 class="text-[#1e293b] font-fredoka font-semibold text-center text-sm px-6 mb-2 leading-snug">
+      <span class="border-b border-[#1e293b]/30 pb-[2px]">{{ project.title }}</span>
     </h3>
 
     <!-- Subtitle (Time or CTA) -->
-    <div class="text-[#e1959c] text-xs font-medium mb-6">
+    <div class="text-[#f497a9] font-quicksand text-xs font-bold mb-6">
       {{ shortType }}
     </div>
   </article>
@@ -85,8 +85,8 @@ const shortType = computed(() => {
 
 const cardStyle = computed(() => ({
   backgroundColor: '#ffffff',
-  border: '3px solid #8b1d24',
-  boxShadow: '4px 4px 0px #8b1d24',
+  border: '3px solid #1e293b',
+  boxShadow: '4px 4px 0px #1e293b',
   minHeight: '220px',
   borderRadius: '16px',
 }))
@@ -99,6 +99,6 @@ article {
 article:hover {
   background-color: #fff5f6 !important; /* Soft pink on hover */
   transform: translateY(2px) translateX(2px);
-  box-shadow: 2px 2px 0px #8b1d24 !important;
+  box-shadow: 2px 2px 0px #1e293b !important;
 }
 </style>

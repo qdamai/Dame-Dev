@@ -1,26 +1,29 @@
 <template>
   <div class="w-full pb-12">
 
-    <!-- Contact / Hero Section -->
-    <ContactSection />
+    <!-- Hero / Manila Folder Section -->
+    <HeroSection />
 
-    <!-- Section Divider (Scalloped) -->
-    <div class="scalloped-top-cream"></div>
+    <!-- About Me / Lanyard ID Access Pass Section -->
+    <AboutSection />
+
+    <!-- Skills / Page Curl & Pixel Section -->
+    <SkillsSection />
 
     <!-- Featured Work Heading -->
-    <div class="bg-cream-solid relative z-20 py-12 px-4 md:px-8">
+    <div class="bg-cream-solid relative z-20 py-16 px-4 md:px-8">
       
-      <!-- Outer container with dark red border -->
-      <div class="max-w-5xl mx-auto w-full border-[6px] md:border-[10px] border-[#8b1d24] bg-[#fce7ec] p-2 md:p-3 shadow-xl relative">
+      <!-- Outer container with Slate-800 border -->
+      <div id="featured-work-heading" class="max-w-5xl mx-auto w-full border-[6px] md:border-[8px] border-[#1e293b] bg-[#ffd1dc] p-2 md:p-3 shadow-[8px_8px_0px_#1e293b] relative">
         
-        <!-- Inner light pink border -->
-        <div class="border-[3px] md:border-[5px] border-[#e1959c] p-2 md:p-3 h-full w-full">
+        <!-- Inner light blue border -->
+        <div class="border-[3px] md:border-[4px] border-[#aec6cf] p-2 md:p-3 h-full w-full">
           
           <!-- Inner white border + Background Pattern -->
-          <div class="border-[3px] md:border-[5px] border-white p-6 md:p-12 h-full w-full bg-pattern-mini-love">
+          <div class="border-[3px] md:border-[4px] border-white p-6 md:p-12 h-full w-full bg-pattern-mini-love">
             
             <div class="flex flex-col items-center gap-2 mb-12 relative z-10">
-              <h2 class="font-serif text-4xl md:text-5xl font-bold relative inline-block text-center text-[#8b1d24]">
+              <h2 class="font-pixel text-4xl md:text-5xl font-bold relative inline-block text-center text-[#1e293b] tracking-widest uppercase">
                 Featured Work
                 <!-- Inline highlighter stroke under the heading -->
                 <span
@@ -28,7 +31,7 @@
                   aria-hidden="true"
                 ></span>
               </h2>
-              <p class="font-cursive text-xl text-[#8b1d24]/90 font-semibold bg-white/50 px-3 py-1 rounded-full mt-2">
+              <p class="font-quicksand font-bold text-sm text-[#1e293b]/90 bg-white/60 px-4 py-1.5 rounded-full mt-4 border border-[#1e293b]/20">
                 {{ projects.length }} carefully crafted pieces
               </p>
             </div>
@@ -64,7 +67,9 @@
 import { useRouter } from 'vue-router'
 import { projects } from '../data/projects.js'
 import ProjectCard from '../components/ProjectCard.vue'
-import ContactSection from '../components/ContactSection.vue'
+import HeroSection from '../components/HeroSection.vue'
+import AboutSection from '../components/AboutSection.vue'
+import SkillsSection from '../components/SkillsSection.vue'
 import AppFooter from '../components/AppFooter.vue'
 
 const router = useRouter()

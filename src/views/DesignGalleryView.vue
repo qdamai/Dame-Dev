@@ -1,15 +1,15 @@
 <template>
-  <div class="w-full bg-[#fff8eb] pb-24 relative z-10">
+  <div class="w-full bg-[#fdfbf7] pb-24 relative z-10">
 
     <!-- Scalloped transition from Cream to Pink -->
     <div class="scalloped-top-pink"></div>
 
     <!-- Page Header (Nested Scrapbook Borders) -->
     <div class="px-4 md:px-8 pt-12 pb-6 max-w-5xl mx-auto relative z-20">
-      <div class="w-full border-[6px] md:border-[8px] border-[#1e3a8a] bg-[#fce7ec] p-2 shadow-[6px_6px_0px_#1e3a8a] relative">
+      <div class="w-full border-[6px] md:border-[8px] border-[#1e293b] bg-[#ffd1dc] p-2 shadow-[6px_6px_0px_#1e293b] relative">
         <div class="border-[3px] border-[#e1959c] p-2 w-full">
           <div class="border-[3px] border-white p-6 md:p-10 w-full bg-pattern-mini-love flex flex-col items-center text-center">
-            <h1 class="font-fredoka text-4xl md:text-5xl font-bold text-[#1e3a8a] relative inline-block">
+            <h1 class="font-fredoka text-4xl md:text-5xl font-bold text-[#1e293b] relative inline-block">
               Design Gallery
               <!-- Inline highlighter stroke under the heading -->
               <span
@@ -17,7 +17,7 @@
                 aria-hidden="true"
               ></span>
             </h1>
-            <p class="font-quicksand text-lg md:text-xl text-[#1e3a8a] font-bold bg-white/60 px-6 py-2.5 rounded-full mt-6">
+            <p class="font-quicksand text-lg md:text-xl text-[#1e293b] font-bold bg-white/60 px-6 py-2.5 rounded-full mt-6">
               A collection of my graphic design work, sorted by folder
             </p>
           </div>
@@ -36,11 +36,11 @@
       >
         <!-- Divider with Folder Badge -->
         <div class="flex items-center gap-4 mb-10 mt-6">
-          <div class="flex items-center gap-2 px-5 py-2.5 bg-[#bfdbfe] text-[#1e3a8a] font-fredoka text-lg md:text-xl rounded-xl border-[3px] border-[#1e3a8a] shadow-[4px_4px_0px_#1e3a8a] relative z-10">
+          <div class="flex items-center gap-2 px-5 py-2.5 bg-[#bfdbfe] text-[#1e293b] font-fredoka text-lg md:text-xl rounded-xl border-[3px] border-[#1e293b] shadow-[4px_4px_0px_#1e293b] relative z-10 font-pixel">
             <Icon icon="solar:folder-open-bold-duotone" width="28" height="28" class="text-[#e11d48]" />
             <span>{{ category.label }}</span>
           </div>
-          <div class="h-[3px] bg-[#1e3a8a] border-dashed border-t-[3px] flex-1"></div>
+          <div class="h-[3px] bg-[#1e293b] border-dashed border-t-[3px] flex-1"></div>
         </div>
 
         <!-- VIDEO GRID -->
@@ -53,7 +53,7 @@
             <!-- Washi/Masking Tape -->
             <div class="masking-tape" style="left: 50%; transform: translateX(-50%) rotate(1deg); top: -14px;"></div>
             
-            <div class="relative w-full overflow-hidden rounded-lg border-2 border-[#1e3a8a] bg-black">
+            <div class="relative w-full overflow-hidden rounded-lg border-2 border-[#1e293b] bg-black">
               <video
                 :src="src"
                 controls
@@ -81,7 +81,7 @@
               <div class="masking-tape" style="left: 50%; transform: translateX(-50%) rotate(-2deg); top: -14px;"></div>
               
               <!-- Image Container: w-full h-auto for original aspect ratio -->
-              <div class="relative w-full overflow-hidden rounded-lg border-2 border-[#1e3a8a] cursor-pointer" @click="openLightbox(category, idx)">
+              <div class="relative w-full overflow-hidden rounded-lg border-2 border-[#1e293b] cursor-pointer" @click="openLightbox(category, idx)">
                 <img
                   :src="src"
                   :alt="`design ${idx + 1}`"
@@ -91,9 +91,9 @@
 
                 <!-- Hover overlay -->
                 <div
-                  class="absolute inset-0 bg-[#1e3a8a]/40 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center"
+                  class="absolute inset-0 bg-[#1e293b]/40 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center"
                 >
-                  <span class="bg-white text-[#1e3a8a] font-fredoka text-sm px-4 py-2 rounded-full border-[3px] border-[#1e3a8a] shadow-[2px_2px_0px_#1e3a8a] pointer-events-none">
+                  <span class="bg-white text-[#1e293b] font-fredoka text-sm px-4 py-2 rounded-full border-[3px] border-[#1e293b] shadow-[2px_2px_0px_#1e293b] pointer-events-none">
                     View Full Image
                   </span>
                 </div>
@@ -123,7 +123,7 @@
         >
           <button
             @click.stop="lightbox.active = false"
-            class="absolute top-5 right-5 w-12 h-12 bg-[#e11d48] rounded-full flex items-center justify-center border-[3px] border-[#1e3a8a] shadow-[4px_4px_0px_#1e3a8a] text-white hover:translate-y-[2px] hover:translate-x-[2px] hover:shadow-[2px_2px_0px_#1e3a8a] transition-all cursor-pointer pointer-events-auto"
+            class="absolute top-5 right-5 w-12 h-12 bg-[#e11d48] rounded-full flex items-center justify-center border-[3px] border-[#1e293b] shadow-[4px_4px_0px_#1e293b] text-white hover:translate-y-[2px] hover:translate-x-[2px] hover:shadow-[2px_2px_0px_#1e293b] transition-all cursor-pointer pointer-events-auto"
             aria-label="Close lightbox"
             style="z-index: 10000;"
           >
@@ -135,17 +135,17 @@
           <img
             :src="lightbox.src"
             alt="Full size design"
-            class="max-w-full max-h-[78vh] object-contain rounded-xl shadow-[8px_8px_0px_rgba(30,58,138,0.5)] border-[4px] border-[#1e3a8a] bg-white relative z-[10000]"
+            class="max-w-full max-h-[78vh] object-contain rounded-xl shadow-[8px_8px_0px_rgba(30,58,138,0.5)] border-[4px] border-[#1e293b] bg-white relative z-[10000]"
           />
 
           <div class="mt-8 flex items-center gap-6 relative z-[10000]">
-            <button @click.stop="lbPrev" class="bg-[#bfdbfe] text-[#1e3a8a] font-fredoka px-6 py-2 rounded-full border-[3px] border-[#1e3a8a] shadow-[4px_4px_0px_#1e3a8a] hover:translate-y-[2px] hover:translate-x-[2px] hover:shadow-[2px_2px_0px_#1e3a8a] transition-all">
+            <button @click.stop="lbPrev" class="bg-[#bfdbfe] text-[#1e293b] font-fredoka px-6 py-2 rounded-full border-[3px] border-[#1e293b] shadow-[4px_4px_0px_#1e293b] hover:translate-y-[2px] hover:translate-x-[2px] hover:shadow-[2px_2px_0px_#1e293b] transition-all">
               Previous
             </button>
-            <span class="font-fredoka text-white text-xl bg-[#1e3a8a] px-4 py-1 rounded-full border-[2px] border-white/20">
+            <span class="font-fredoka text-white text-xl bg-[#1e293b] px-4 py-1 rounded-full border-[2px] border-white/20 font-pixel">
               {{ lightbox.index + 1 }} / {{ lightbox.images.length }}
             </span>
-            <button @click.stop="lbNext" class="bg-[#bfdbfe] text-[#1e3a8a] font-fredoka px-6 py-2 rounded-full border-[3px] border-[#1e3a8a] shadow-[4px_4px_0px_#1e3a8a] hover:translate-y-[2px] hover:translate-x-[2px] hover:shadow-[2px_2px_0px_#1e3a8a] transition-all">
+            <button @click.stop="lbNext" class="bg-[#bfdbfe] text-[#1e293b] font-fredoka px-6 py-2 rounded-full border-[3px] border-[#1e293b] shadow-[4px_4px_0px_#1e293b] hover:translate-y-[2px] hover:translate-x-[2px] hover:shadow-[2px_2px_0px_#1e293b] transition-all">
               Next
             </button>
           </div>

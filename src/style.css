@@ -3,22 +3,22 @@
 /* ─── BLUE & PINK SCRAPBOOK TOKENS ─── */
 :root {
   /* Colors */
-  --bg-cream: #fffcf8;
-  --bg-baby-blue: #c1e1f5;
-  --bg-bubblegum-pink: #ffb6c1;
-  --bg-darker-pink: #f497a9;
+  --bg-cream: #FDFBF7; /* Off-white paper base */
+  --bg-baby-blue: #AEC6CF; /* Soft Blue Y2K */
+  --bg-bubblegum-pink: #FFD1DC; /* Soft Pink Y2K */
+  --bg-darker-pink: #F497A9;
   
-  --text-dark-brown: #4a2c2c;
-  --text-muted: #6a4c4c;
+  --text-dark-brown: #1E293B; /* slate-800 for Y2K high-contrast */
+  --text-muted: #475569; /* slate-600 */
 
   /* Typography */
   --font-serif: 'Playfair Display', serif;
   --font-sans: 'Inter', sans-serif;
   --font-cursive: 'Caveat', cursive;
 
-  /* Soft scrapbook shadows (warmer brown tint) */
-  --shadow-scrapbook: 0 4px 16px rgba(74, 44, 44, 0.08);
-  --shadow-scrapbook-hover: 0 10px 28px rgba(74, 44, 44, 0.12);
+  /* Soft scrapbook shadows */
+  --shadow-scrapbook: 4px 4px 0px #1E293B;
+  --shadow-scrapbook-hover: 6px 6px 0px #1E293B;
 }
 
 /* ─── RESET ─── */
@@ -30,7 +30,11 @@ body {
   margin: 0;
   padding: 0;
   font-family: var(--font-sans);
-  background-color: var(--bg-cream); /* Default base, sections will override */
+  background-color: var(--bg-cream);
+  background-image: 
+    linear-gradient(rgba(174, 198, 207, 0.12) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(174, 198, 207, 0.12) 1px, transparent 1px);
+  background-size: 20px 20px;
   color: var(--text-dark-brown);
   overflow-x: hidden;
   -webkit-font-smoothing: antialiased;
@@ -39,6 +43,12 @@ body {
 /* ─── TYPOGRAPHY UTILITIES ─── */
 .font-cursive {
   font-family: var(--font-cursive);
+}
+.font-cursive-y2k {
+  font-family: 'Great Vibes', cursive;
+}
+.font-pixel {
+  font-family: 'VT323', monospace;
 }
 .font-serif {
   font-family: var(--font-serif);
@@ -51,6 +61,15 @@ body {
 }
 .font-quicksand {
   font-family: 'Quicksand', sans-serif;
+}
+
+/* Paper Grid Texture Utility */
+.bg-paper-grid {
+  background-color: #FDFBF7;
+  background-image: 
+    linear-gradient(rgba(174, 198, 207, 0.12) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(174, 198, 207, 0.12) 1px, transparent 1px);
+  background-size: 20px 20px;
 }
 
 /* ─── MODAL OVERLAY ─── */
@@ -86,8 +105,8 @@ body {
 .bg-blue-checkerboard {
   background-color: var(--bg-cream);
   background-image:
-    linear-gradient(45deg, rgba(193, 225, 245, 0.4) 25%, transparent 25%, transparent 75%, rgba(193, 225, 245, 0.4) 75%),
-    linear-gradient(45deg, rgba(193, 225, 245, 0.4) 25%, transparent 25%, transparent 75%, rgba(193, 225, 245, 0.4) 75%);
+    linear-gradient(45deg, rgba(174, 198, 207, 0.25) 25%, transparent 25%, transparent 75%, rgba(174, 198, 207, 0.25) 75%),
+    linear-gradient(45deg, rgba(174, 198, 207, 0.25) 25%, transparent 25%, transparent 75%, rgba(174, 198, 207, 0.25) 75%);
   background-size: 60px 60px;
   background-position: 0 0, 30px 30px;
 }
@@ -95,8 +114,8 @@ body {
 .bg-pink-checkerboard {
   background-color: var(--bg-cream);
   background-image:
-    linear-gradient(45deg, rgba(255, 182, 193, 0.25) 25%, transparent 25%, transparent 75%, rgba(255, 182, 193, 0.25) 75%),
-    linear-gradient(45deg, rgba(255, 182, 193, 0.25) 25%, transparent 25%, transparent 75%, rgba(255, 182, 193, 0.25) 75%);
+    linear-gradient(45deg, rgba(255, 209, 220, 0.25) 25%, transparent 25%, transparent 75%, rgba(255, 209, 220, 0.25) 75%),
+    linear-gradient(45deg, rgba(255, 209, 220, 0.25) 25%, transparent 25%, transparent 75%, rgba(255, 209, 220, 0.25) 75%);
   background-size: 60px 60px;
   background-position: 0 0, 30px 30px;
 }
