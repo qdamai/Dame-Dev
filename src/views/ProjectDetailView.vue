@@ -116,16 +116,15 @@
               Gallery
             </p>
             
-            <div class="flex overflow-x-auto gap-4 pb-6 snap-x snap-mandatory hide-scrollbar">
+            <div class="flex overflow-x-auto gap-6 pb-6 snap-x snap-mandatory hide-scrollbar">
               <button
                 v-for="(img, i) in project.images"
                 :key="i"
                 @click="openLightbox(i)"
-                class="flex-none snap-center rounded-xl overflow-hidden border-[3px] transition-transform hover:-translate-y-1"
+                class="flex-none snap-center rounded-xl overflow-hidden border-[3px] transition-transform hover:-translate-y-1 h-[280px] md:h-[350px] w-auto bg-white"
                 :class="lightboxIndex === i ? 'border-[#e11d48] shadow-[2px_2px_0px_#e11d48]' : 'border-[#1e3a8a] shadow-[4px_4px_0px_#1e3a8a]'"
-                style="width: 280px; height: 380px;"
               >
-                <img :src="img" :alt="`Gallery ${i + 1}`" class="w-full h-full object-cover block" />
+                <img :src="img" :alt="`Gallery ${i + 1}`" class="h-full w-auto block" />
               </button>
             </div>
           </div>
