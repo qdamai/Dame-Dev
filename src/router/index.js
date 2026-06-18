@@ -15,6 +15,11 @@ const router = createRouter({
       component: () => import('../views/DesignGalleryView.vue'),
     },
     {
+      path: '/resume',
+      name: 'online-resume',
+      component: () => import('../views/OnlineResumeView.vue'),
+    },
+    {
       path: '/project/:id',
       name: 'project-detail',
       component: () => import('../views/ProjectDetailView.vue'),

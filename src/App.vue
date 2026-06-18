@@ -14,6 +14,7 @@
         <div class="flex items-center gap-2 md:gap-4">
           <router-link to="/" class="nav-link" active-class="nav-active">Web &amp; App</router-link>
           <router-link to="/design" class="nav-link" active-class="nav-active">Design Gallery</router-link>
+          <router-link to="/resume" class="nav-link" active-class="nav-active">Online Resume</router-link>
         </div>
       </nav>
     </header>
