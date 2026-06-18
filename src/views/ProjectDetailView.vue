@@ -62,67 +62,71 @@
           </div>
 
           <!-- Description Sections -->
-          <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
-            <div class="md:col-span-2 space-y-8 font-quicksand font-semibold text-lg text-[#1e3a8a] leading-relaxed">
-              
-              <div>
-                <h3 class="font-fredoka text-2xl text-[#e11d48] flex items-center gap-2 mb-3">
-                  <Icon icon="solar:notes-bold-duotone" width="32" height="32" color="#1e3a8a" />
-                  Summary
-                </h3>
-                <p class="bg-[#fff8eb] p-5 rounded-xl border-[2px] border-[#1e3a8a] border-dashed">{{ project.summary }}</p>
-              </div>
+          <div class="space-y-8 font-quicksand font-semibold text-lg text-[#1e3a8a] leading-relaxed mb-12">
+            
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+              <div class="space-y-8">
+                <div>
+                  <h3 class="font-fredoka text-2xl text-[#e11d48] flex items-center gap-2 mb-3">
+                    <Icon icon="solar:notes-bold-duotone" width="32" height="32" color="#1e3a8a" />
+                    Summary
+                  </h3>
+                  <p class="bg-[#fff8eb] p-5 rounded-xl border-[2px] border-[#1e3a8a] border-dashed">{{ project.summary }}</p>
+                </div>
 
-              <div v-if="project.impact">
-                <h3 class="font-fredoka text-2xl text-[#e11d48] flex items-center gap-2 mb-3">
-                  <Icon icon="solar:rocket-bold-duotone" width="32" height="32" color="#1e3a8a" />
-                  Impact
-                </h3>
-                <p class="bg-[#fff8eb] p-5 rounded-xl border-[2px] border-[#1e3a8a] border-dashed">{{ project.impact }}</p>
-              </div>
-
-              <div v-if="project.lessons">
-                <h3 class="font-fredoka text-2xl text-[#e11d48] flex items-center gap-2 mb-3">
-                  <Icon icon="solar:lightbulb-bold-duotone" width="32" height="32" color="#1e3a8a" />
-                  Lessons Learned
-                </h3>
-                <p class="bg-[#fff8eb] p-5 rounded-xl border-[2px] border-[#1e3a8a] border-dashed">{{ project.lessons }}</p>
-              </div>
-            </div>
-
-            <!-- Sidebar (Links & Gallery) -->
-            <div class="md:col-span-1 border-t-[4px] md:border-t-0 md:border-l-[4px] border-[#1e3a8a] pt-8 md:pt-0 md:pl-8">
-              
-              <div v-if="project.link" class="mb-10">
-                <a
-                  :href="project.link"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  class="flex items-center justify-center gap-2 w-full bg-[#fbcfe8] text-[#1e3a8a] font-fredoka text-xl px-6 py-4 rounded-xl border-[3px] border-[#1e3a8a] shadow-[4px_4px_0px_#1e3a8a] hover:translate-y-[2px] hover:translate-x-[2px] hover:shadow-[2px_2px_0px_#1e3a8a] transition-all"
-                >
-                  <Icon icon="solar:star-bold-duotone" width="28" height="28" color="#e11d48" />
-                  Visit Live
-                </a>
-              </div>
-
-              <div>
-                <p class="font-fredoka text-[#1e3a8a] text-2xl mb-4 flex items-center gap-2">
-                  <Icon icon="solar:gallery-bold-duotone" width="32" height="32" color="#e11d48" />
-                  Gallery
-                </p>
-                <div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-2 gap-4">
-                  <button
-                    v-for="(img, i) in project.images"
-                    :key="i"
-                    @click="openLightbox(i)"
-                    class="rounded-xl overflow-hidden border-[3px] transition-transform hover:-translate-y-1"
-                    :class="lightboxIndex === i ? 'border-[#e11d48] shadow-[2px_2px_0px_#e11d48]' : 'border-[#1e3a8a] shadow-[2px_2px_0px_#1e3a8a]'"
-                  >
-                    <img :src="img" :alt="`Gallery ${i + 1}`" class="w-full h-24 object-cover block" />
-                  </button>
+                <div v-if="project.impact">
+                  <h3 class="font-fredoka text-2xl text-[#e11d48] flex items-center gap-2 mb-3">
+                    <Icon icon="solar:rocket-bold-duotone" width="32" height="32" color="#1e3a8a" />
+                    Impact
+                  </h3>
+                  <p class="bg-[#fff8eb] p-5 rounded-xl border-[2px] border-[#1e3a8a] border-dashed">{{ project.impact }}</p>
                 </div>
               </div>
 
+              <div class="space-y-8">
+                <div v-if="project.lessons">
+                  <h3 class="font-fredoka text-2xl text-[#e11d48] flex items-center gap-2 mb-3">
+                    <Icon icon="solar:lightbulb-bold-duotone" width="32" height="32" color="#1e3a8a" />
+                    Lessons Learned
+                  </h3>
+                  <p class="bg-[#fff8eb] p-5 rounded-xl border-[2px] border-[#1e3a8a] border-dashed">{{ project.lessons }}</p>
+                </div>
+                
+                <!-- Visit Live Button (Moved here) -->
+                <div v-if="project.link" class="pt-2">
+                  <a
+                    :href="project.link"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    class="inline-flex items-center justify-center gap-3 w-full bg-[#fbcfe8] text-[#1e3a8a] font-fredoka text-xl px-6 py-4 rounded-xl border-[3px] border-[#1e3a8a] shadow-[4px_4px_0px_#1e3a8a] hover:translate-y-[2px] hover:translate-x-[2px] hover:shadow-[2px_2px_0px_#1e3a8a] transition-all"
+                  >
+                    <Icon icon="solar:star-bold-duotone" width="28" height="28" color="#e11d48" />
+                    Visit Live Project
+                  </a>
+                </div>
+              </div>
+            </div>
+
+          </div>
+
+          <!-- Horizontal Swipe Gallery -->
+          <div class="border-t-[4px] border-[#1e3a8a] border-dashed pt-8">
+            <p class="font-fredoka text-[#1e3a8a] text-3xl mb-6 flex items-center gap-2">
+              <Icon icon="solar:gallery-bold-duotone" width="36" height="36" color="#e11d48" />
+              Gallery
+            </p>
+            
+            <div class="flex overflow-x-auto gap-4 pb-6 snap-x snap-mandatory hide-scrollbar">
+              <button
+                v-for="(img, i) in project.images"
+                :key="i"
+                @click="openLightbox(i)"
+                class="flex-none snap-center rounded-xl overflow-hidden border-[3px] transition-transform hover:-translate-y-1"
+                :class="lightboxIndex === i ? 'border-[#e11d48] shadow-[2px_2px_0px_#e11d48]' : 'border-[#1e3a8a] shadow-[4px_4px_0px_#1e3a8a]'"
+                style="width: 280px; height: 380px;"
+              >
+                <img :src="img" :alt="`Gallery ${i + 1}`" class="w-full h-full object-cover block" />
+              </button>
             </div>
           </div>
           

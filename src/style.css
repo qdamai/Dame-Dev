@@ -64,6 +64,16 @@ body {
   backdrop-filter: blur(2px);
 }
 
+/* Hide scrollbar for Chrome, Safari and Opera */
+.hide-scrollbar::-webkit-scrollbar {
+  display: none;
+}
+/* Hide scrollbar for IE, Edge and Firefox */
+.hide-scrollbar {
+  -ms-overflow-style: none;  /* IE and Edge */
+  scrollbar-width: none;  /* Firefox */
+}
+
 /* ─── BACKGROUND UTILITIES ─── */
 .bg-cream-solid {
   background-color: var(--bg-cream);
