@@ -34,13 +34,33 @@
           </svg>
         </button>
 
-        <!-- Cover Image (Top) -->
-        <div class="w-full border-b-[4px] border-[#1e293b] relative">
-          <img
-            :src="project.images[0]"
-            :alt="project.title"
-            class="w-full h-auto md:h-[450px] object-cover"
-          />
+        <!-- Typography Banner (Top) -->
+        <div class="w-full border-b-[4px] border-[#1e293b] bg-pink-checkerboard py-16 md:py-24 px-6 flex flex-col items-center justify-center text-center relative overflow-hidden min-h-[300px] md:min-h-[380px]">
+          <!-- Washi tapes for scrapbooking overlay -->
+          <div class="absolute top-4 left-6 bg-[#bfdbfe]/90 border-2 border-[#1e293b] py-1 px-4 text-xs font-pixel tracking-wider text-[#1e293b] rotate-[-4deg] shadow-[2px_2px_0px_#1e293b] select-none">
+            PROJECT FILE
+          </div>
+          <div class="absolute bottom-4 right-6 bg-[#ffd1dc]/90 border-2 border-[#1e293b] py-1 px-4 text-xs font-pixel tracking-wider text-[#1e293b] rotate-[3deg] shadow-[2px_2px_0px_#1e293b] select-none">
+            {{ project.id.toUpperCase() }} // Y2K
+          </div>
+
+          <!-- Type label -->
+          <span class="font-sans font-bold text-[10px] md:text-xs uppercase tracking-[0.25em] text-[#e11d48] bg-white px-4 py-1.5 rounded-full border-2 border-[#1e293b] shadow-[2px_2px_0px_#1e293b] mb-6">
+            {{ project.type }}
+          </span>
+
+          <!-- Stylized Typography Title -->
+          <h2 
+            class="font-pixel text-4xl sm:text-5xl md:text-7xl font-extrabold text-white tracking-widest uppercase leading-tight max-w-2xl px-2"
+            style="text-shadow: 4px 4px 0px #1e293b; -webkit-text-stroke: 1.5px #1e293b;"
+          >
+            {{ project.title }}
+          </h2>
+
+          <!-- Role Label -->
+          <p class="font-cursive-y2k text-3xl md:text-4xl text-[#e11d48] mt-4 rotate-[-1deg]">
+            {{ project.role }}
+          </p>
         </div>
 
         <!-- Title & Details -->
