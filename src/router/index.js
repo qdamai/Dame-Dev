@@ -12,10 +12,12 @@ const router = createRouter({
     {
       path: '/design',
       name: 'design-gallery',
-      // route level code-splitting
-      // this generates a separate chunk (About.[hash].js) for this route
-      // which is lazy-loaded when the route is visited.
       component: () => import('../views/DesignGalleryView.vue'),
+    },
+    {
+      path: '/project/:id',
+      name: 'project-detail',
+      component: () => import('../views/ProjectDetailView.vue'),
     },
   ],
   scrollBehavior(to, from, savedPosition) {

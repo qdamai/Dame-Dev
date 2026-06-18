@@ -61,15 +61,15 @@
 </template>
 
 <script setup>
+import { useRouter } from 'vue-router'
 import { projects } from '../data/projects.js'
 import ProjectCard from '../components/ProjectCard.vue'
 import ContactSection from '../components/ContactSection.vue'
 import AppFooter from '../components/AppFooter.vue'
-import { useModalStore } from '../stores/modal'
 
-const modalStore = useModalStore()
+const router = useRouter()
 
 function openProject(project) {
-  modalStore.open(project)
+  router.push('/project/' + project.id)
 }
 </script>

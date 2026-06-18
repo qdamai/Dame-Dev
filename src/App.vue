@@ -19,20 +19,10 @@
         </transition>
       </router-view>
     </main>
-
-    <!-- Global Project Modal -->
-    <ProjectModal
-      :project="modalStore.activeProject"
-      @close="modalStore.close()"
-    />
   </div>
 </template>
 
 <script setup>
-import { useModalStore } from './stores/modal'
-import ProjectModal from './components/ProjectModal.vue'
-
-const modalStore = useModalStore()
 </script>
 
 <style scoped>
