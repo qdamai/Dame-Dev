@@ -135,41 +135,44 @@
     </div>
 
     <!-- Lightbox -->
-    <transition name="modal">
-      <div
-        v-if="lightboxIndex !== null"
-        class="fixed inset-0 z-[300] bg-black/90 flex flex-col items-center justify-center p-4 backdrop-blur-sm"
-        @click.self="lightboxIndex = null"
-      >
-        <button
-          @click="lightboxIndex = null"
-          class="absolute top-5 right-5 z-50 w-12 h-12 bg-[#e11d48] rounded-full flex items-center justify-center border-[3px] border-[#1e3a8a] shadow-[4px_4px_0px_#1e3a8a] text-white hover:translate-y-[2px] hover:translate-x-[2px] hover:shadow-[2px_2px_0px_#1e3a8a] transition-all cursor-pointer"
-          aria-label="Close lightbox"
+    <teleport to="body">
+      <transition name="modal">
+        <div
+          v-if="lightboxIndex !== null"
+          class="fixed inset-0 z-[9999] bg-black/90 flex flex-col items-center justify-center p-4 backdrop-blur-sm"
+          @click.self="closeLightbox"
         >
-          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="4" stroke-linecap="round" stroke-linejoin="round">
-            <path d="M18 6L6 18M6 6l12 12" />
-          </svg>
-        </button>
-
-        <img
-          :src="project.images[lightboxIndex]"
-          alt="Full size view"
-          class="max-w-full max-h-[78vh] object-contain rounded-xl shadow-[8px_8px_0px_rgba(30,58,138,0.5)] border-[4px] border-[#1e3a8a] bg-white"
-        />
-
-        <div class="mt-8 flex items-center gap-6">
-          <button @click="prevImage" class="bg-[#bfdbfe] text-[#1e3a8a] font-fredoka px-6 py-2 rounded-full border-[3px] border-[#1e3a8a] shadow-[4px_4px_0px_#1e3a8a] hover:translate-y-[2px] hover:translate-x-[2px] hover:shadow-[2px_2px_0px_#1e3a8a] transition-all">
-            Previous
+          <button
+            @click.stop="closeLightbox"
+            class="absolute top-5 right-5 w-12 h-12 bg-[#e11d48] rounded-full flex items-center justify-center border-[3px] border-[#1e3a8a] shadow-[4px_4px_0px_#1e3a8a] text-white hover:translate-y-[2px] hover:translate-x-[2px] hover:shadow-[2px_2px_0px_#1e3a8a] transition-all cursor-pointer pointer-events-auto"
+            aria-label="Close lightbox"
+            style="z-index: 10000;"
+          >
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="4" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M18 6L6 18M6 6l12 12" />
+            </svg>
           </button>
-          <span class="font-fredoka text-white text-xl bg-[#1e3a8a] px-4 py-1 rounded-full border-[2px] border-white/20">
-            {{ lightboxIndex + 1 }} / {{ project.images.length }}
-          </span>
-          <button @click="nextImage" class="bg-[#bfdbfe] text-[#1e3a8a] font-fredoka px-6 py-2 rounded-full border-[3px] border-[#1e3a8a] shadow-[4px_4px_0px_#1e3a8a] hover:translate-y-[2px] hover:translate-x-[2px] hover:shadow-[2px_2px_0px_#1e3a8a] transition-all">
-            Next
-          </button>
+
+          <img
+            :src="project.images[lightboxIndex]"
+            alt="Full size view"
+            class="max-w-full max-h-[78vh] object-contain rounded-xl shadow-[8px_8px_0px_rgba(30,58,138,0.5)] border-[4px] border-[#1e3a8a] bg-white relative z-[10000]"
+          />
+
+          <div class="mt-8 flex items-center gap-6 relative z-[10000]">
+            <button @click.stop="prevImage" class="bg-[#bfdbfe] text-[#1e3a8a] font-fredoka px-6 py-2 rounded-full border-[3px] border-[#1e3a8a] shadow-[4px_4px_0px_#1e3a8a] hover:translate-y-[2px] hover:translate-x-[2px] hover:shadow-[2px_2px_0px_#1e3a8a] transition-all">
+              Previous
+            </button>
+            <span class="font-fredoka text-white text-xl bg-[#1e3a8a] px-4 py-1 rounded-full border-[2px] border-white/20">
+              {{ lightboxIndex + 1 }} / {{ project.images.length }}
+            </span>
+            <button @click.stop="nextImage" class="bg-[#bfdbfe] text-[#1e3a8a] font-fredoka px-6 py-2 rounded-full border-[3px] border-[#1e3a8a] shadow-[4px_4px_0px_#1e3a8a] hover:translate-y-[2px] hover:translate-x-[2px] hover:shadow-[2px_2px_0px_#1e3a8a] transition-all">
+              Next
+            </button>
+          </div>
         </div>
-      </div>
-    </transition>
+      </transition>
+    </teleport>
   </div>
   
   <div v-else class="min-h-screen flex items-center justify-center bg-[#fff8eb]">
@@ -202,6 +205,10 @@ function goBack() {
 
 function openLightbox(i) {
   lightboxIndex.value = i
+}
+
+function closeLightbox() {
+  lightboxIndex.value = null
 }
 
 function prevImage() {
