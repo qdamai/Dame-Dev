@@ -116,7 +116,11 @@
               Gallery
             </p>
             
-            <div class="flex overflow-x-auto gap-6 pb-6 snap-x snap-mandatory hide-scrollbar">
+            <div
+              ref="galleryContainer"
+              @scroll="handleGalleryScroll"
+              class="flex overflow-x-auto gap-6 pb-6 snap-x snap-mandatory hide-scrollbar"
+            >
               <button
                 v-for="(img, i) in project.images"
                 :key="i"
@@ -126,6 +130,18 @@
               >
                 <img :src="img" :alt="`Gallery ${i + 1}`" class="h-full w-auto block" />
               </button>
+            </div>
+
+            <!-- Carousel Dot Indicators -->
+            <div v-if="project.images && project.images.length > 1" class="flex justify-center items-center gap-3 mt-4 mb-2">
+              <button
+                v-for="(img, i) in project.images"
+                :key="i"
+                @click="scrollToImage(i)"
+                class="w-4 h-4 rounded-full border-[3px] border-[#1e3a8a] transition-all cursor-pointer pointer-events-auto"
+                :class="activeSlideIndex === i ? 'bg-[#e11d48] scale-110 shadow-[2px_2px_0px_#e11d48]' : 'bg-white hover:bg-[#fbcfe8]'"
+                :aria-label="`Go to image ${i + 1}`"
+              ></button>
             </div>
           </div>
           
@@ -193,6 +209,8 @@ const project = computed(() => {
 })
 
 const lightboxIndex = ref(null)
+const activeSlideIndex = ref(0)
+const galleryContainer = ref(null)
 
 onMounted(() => {
   window.scrollTo({ top: 0, behavior: 'instant' })
@@ -218,5 +236,43 @@ function prevImage() {
 function nextImage() {
   if (lightboxIndex.value === null || !project.value) return
   lightboxIndex.value = (lightboxIndex.value + 1) % project.value.images.length
+}
+
+function handleGalleryScroll() {
+  if (!galleryContainer.value) return
+  const container = galleryContainer.value
+  const scrollLeft = container.scrollLeft
+  const containerWidth = container.clientWidth
+  const children = container.children
+  if (children.length === 0) return
+
+  let closestIndex = 0
+  let minDistance = Infinity
+
+  for (let idx = 0; idx < children.length; idx++) {
+    const child = children[idx]
+    const childCenter = child.offsetLeft + child.clientWidth / 2
+    const containerVisibleCenter = scrollLeft + containerWidth / 2
+    const distance = Math.abs(childCenter - containerVisibleCenter)
+    if (distance < minDistance) {
+      minDistance = distance
+      closestIndex = idx
+    }
+  }
+  activeSlideIndex.value = closestIndex
+}
+
+function scrollToImage(i) {
+  if (!galleryContainer.value) return
+  const container = galleryContainer.value
+  const children = container.children
+  if (children[i]) {
+    children[i].scrollIntoView({
+      behavior: 'smooth',
+      block: 'nearest',
+      inline: 'center'
+    })
+    activeSlideIndex.value = i
+  }
 }
 </script>

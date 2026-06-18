@@ -17,7 +17,7 @@
                 aria-hidden="true"
               ></span>
             </h1>
-            <p class="font-quicksand text-lg md:text-xl text-[#1e3a8a] font-bold bg-white/60 px-4 py-1.5 rounded-full mt-6 border-[2px] border-[#1e3a8a] border-dashed">
+            <p class="font-quicksand text-lg md:text-xl text-[#1e3a8a] font-bold bg-white/60 px-6 py-2.5 rounded-full mt-6">
               A collection of my graphic design work, sorted by folder
             </p>
           </div>

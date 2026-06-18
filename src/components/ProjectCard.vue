@@ -84,19 +84,21 @@ const shortType = computed(() => {
 })
 
 const cardStyle = computed(() => ({
-  backgroundColor: 'var(--bg-cream)',
-  border: '2px solid #8b1d24',
+  backgroundColor: '#ffffff',
+  border: '3px solid #8b1d24',
+  boxShadow: '4px 4px 0px #8b1d24',
   minHeight: '220px',
+  borderRadius: '16px',
 }))
 </script>
 
 <style scoped>
 article {
-  background-color: var(--bg-cream);
+  background-color: #ffffff;
 }
 article:hover {
-  background-color: #fce7ec; /* Very light pink on hover */
-  transform: translateY(-3px);
-  box-shadow: 0 6px 16px rgba(139, 29, 36, 0.12);
+  background-color: #fff5f6 !important; /* Soft pink on hover */
+  transform: translateY(2px) translateX(2px);
+  box-shadow: 2px 2px 0px #8b1d24 !important;
 }
 </style>
