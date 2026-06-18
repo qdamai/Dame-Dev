@@ -140,10 +140,10 @@
       <div
         v-if="lightboxIndex !== null && localProject"
         class="fixed inset-0 z-[300] bg-black/90 flex flex-col items-center justify-center p-4 backdrop-blur-sm"
-        @click.self="lightboxIndex = null"
+        @click.self="closeLightbox"
       >
         <button
-          @click="lightboxIndex = null"
+          @click="closeLightbox"
           class="absolute top-5 right-5 w-12 h-12 bg-[#e11d48] rounded-full flex items-center justify-center border-[3px] border-[#1e3a8a] shadow-[4px_4px_0px_#1e3a8a] text-white hover:translate-y-[2px] hover:translate-x-[2px] hover:shadow-[2px_2px_0px_#1e3a8a] transition-all"
           aria-label="Close lightbox"
         >
@@ -152,11 +152,20 @@
           </svg>
         </button>
 
-        <img
-          :src="localProject.images[lightboxIndex]"
-          alt="Full size view"
-          class="max-w-full max-h-[78vh] object-contain rounded-xl shadow-[8px_8px_0px_rgba(30,58,138,0.5)] border-[4px] border-[#1e3a8a] bg-white"
-        />
+        <!-- Image Wrapper with Zoom / Scroll support -->
+        <div 
+          class="relative max-w-full max-h-[78vh] overflow-auto rounded-xl border-[4px] border-[#1e3a8a] bg-white shadow-[8px_8px_0px_rgba(30,58,138,0.5)] flex items-center justify-center select-none"
+          :class="lightboxZoomed ? 'cursor-zoom-out' : 'cursor-zoom-in'"
+          @click.stop="toggleZoom"
+        >
+          <img
+            :src="localProject.images[lightboxIndex]"
+            alt="Full size view"
+            class="rounded-lg object-contain transition-all duration-300"
+            :class="lightboxZoomed ? 'max-w-[200%] max-h-none w-auto h-auto' : 'max-w-full max-h-[78vh]'"
+            style="image-rendering: -webkit-optimize-contrast; image-rendering: auto;"
+          />
+        </div>
 
         <div class="mt-6 flex items-center gap-6">
           <button @click="prevImage" class="bg-[#bfdbfe] text-[#1e3a8a] font-fredoka px-6 py-2 rounded-full border-[3px] border-[#1e3a8a] shadow-[4px_4px_0px_#1e3a8a] hover:translate-y-[2px] hover:translate-x-[2px] hover:shadow-[2px_2px_0px_#1e3a8a] transition-all">
@@ -184,9 +193,11 @@ defineEmits(['close'])
 const show = ref(false)
 const localProject = ref(null)
 const lightboxIndex = ref(null)
+const lightboxZoomed = ref(false)
 
 watch(() => props.project, (val) => {
   lightboxIndex.value = null
+  lightboxZoomed.value = false
   if (val) {
     localProject.value = val
     show.value = true
@@ -197,15 +208,29 @@ watch(() => props.project, (val) => {
   }
 })
 
-function openLightbox(i) { lightboxIndex.value = i }
+function openLightbox(i) { 
+  lightboxIndex.value = i 
+  lightboxZoomed.value = false
+}
+
+function closeLightbox() {
+  lightboxIndex.value = null
+  lightboxZoomed.value = false
+}
+
+function toggleZoom() {
+  lightboxZoomed.value = !lightboxZoomed.value
+}
 
 function prevImage() {
   if (lightboxIndex.value === null || !localProject.value) return
+  lightboxZoomed.value = false
   lightboxIndex.value = (lightboxIndex.value - 1 + localProject.value.images.length) % localProject.value.images.length
 }
 
 function nextImage() {
   if (lightboxIndex.value === null || !localProject.value) return
+  lightboxZoomed.value = false
   lightboxIndex.value = (lightboxIndex.value + 1) % localProject.value.images.length
 }
 </script>

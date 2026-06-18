@@ -105,13 +105,13 @@ const creativeSkills = [
   {
     name: 'Canva',
     category: 'Creative',
-    icon: 'solar:pen-tool-bold-duotone',
+    icon: 'solar:pen-bold-duotone',
     rating: 5
   },
   {
     name: 'IbisPaint X',
     category: 'Illustration',
-    icon: 'solar:brush-bold-duotone',
+    icon: 'solar:palette-bold-duotone',
     rating: 5
   },
   {
@@ -129,7 +129,7 @@ const creativeSkills = [
   {
     name: 'Photoshop',
     category: 'Design',
-    icon: 'solar:palette-bold-duotone',
+    icon: 'solar:gallery-wide-bold-duotone',
     rating: 3
   },
   {

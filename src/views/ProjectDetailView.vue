@@ -168,11 +168,20 @@
             </svg>
           </button>
 
-          <img
-            :src="project.images[lightboxIndex]"
-            alt="Full size view"
-            class="max-w-full max-h-[78vh] object-contain rounded-xl shadow-[8px_8px_0px_rgba(30,58,138,0.5)] border-[4px] border-[#1e293b] bg-white relative z-[10000]"
-          />
+          <!-- Image Wrapper with Zoom / Scroll support -->
+          <div 
+            class="relative max-w-full max-h-[78vh] overflow-auto rounded-xl border-[4px] border-[#1e293b] bg-white shadow-[8px_8px_0px_rgba(30,58,138,0.5)] flex items-center justify-center relative z-[10000] select-none"
+            :class="lightboxZoomed ? 'cursor-zoom-out' : 'cursor-zoom-in'"
+            @click.stop="toggleZoom"
+          >
+            <img
+              :src="project.images[lightboxIndex]"
+              alt="Full size view"
+              class="rounded-lg object-contain transition-all duration-300"
+              :class="lightboxZoomed ? 'max-w-[200%] max-h-none w-auto h-auto' : 'max-w-full max-h-[78vh]'"
+              style="image-rendering: -webkit-optimize-contrast; image-rendering: auto;"
+            />
+          </div>
 
           <div class="mt-8 flex items-center gap-6 relative z-[10000]">
             <button @click.stop="prevImage" class="bg-[#bfdbfe] text-[#1e293b] font-fredoka px-6 py-2 rounded-full border-[3px] border-[#1e293b] shadow-[4px_4px_0px_#1e293b] hover:translate-y-[2px] hover:translate-x-[2px] hover:shadow-[2px_2px_0px_#1e293b] transition-all">
@@ -209,6 +218,7 @@ const project = computed(() => {
 })
 
 const lightboxIndex = ref(null)
+const lightboxZoomed = ref(false)
 const activeSlideIndex = ref(0)
 const galleryContainer = ref(null)
 
@@ -222,19 +232,27 @@ function goBack() {
 
 function openLightbox(i) {
   lightboxIndex.value = i
+  lightboxZoomed.value = false
 }
 
 function closeLightbox() {
   lightboxIndex.value = null
+  lightboxZoomed.value = false
+}
+
+function toggleZoom() {
+  lightboxZoomed.value = !lightboxZoomed.value
 }
 
 function prevImage() {
   if (lightboxIndex.value === null || !project.value) return
+  lightboxZoomed.value = false
   lightboxIndex.value = (lightboxIndex.value - 1 + project.value.images.length) % project.value.images.length
 }
 
 function nextImage() {
   if (lightboxIndex.value === null || !project.value) return
+  lightboxZoomed.value = false
   lightboxIndex.value = (lightboxIndex.value + 1) % project.value.images.length
 }
 

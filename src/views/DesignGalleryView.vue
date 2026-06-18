@@ -126,11 +126,20 @@
             </svg>
           </button>
 
-          <img
-            :src="lightbox.src"
-            alt="Full size design"
-            class="max-w-full max-h-[78vh] object-contain rounded-xl shadow-[8px_8px_0px_rgba(30,58,138,0.5)] border-[4px] border-[#1e293b] bg-white relative z-[10000]"
-          />
+          <!-- Image Wrapper with Zoom / Scroll support -->
+          <div 
+            class="relative max-w-full max-h-[78vh] overflow-auto rounded-xl border-[4px] border-[#1e293b] bg-white shadow-[8px_8px_0px_rgba(30,58,138,0.5)] flex items-center justify-center relative z-[10000] select-none"
+            :class="lightbox.zoomed ? 'cursor-zoom-out' : 'cursor-zoom-in'"
+            @click.stop="toggleZoom"
+          >
+            <img
+              :src="lightbox.src"
+              alt="Full size design"
+              class="rounded-lg object-contain transition-all duration-300"
+              :class="lightbox.zoomed ? 'max-w-[200%] max-h-none w-auto h-auto' : 'max-w-full max-h-[78vh]'"
+              style="image-rendering: -webkit-optimize-contrast; image-rendering: auto;"
+            />
+          </div>
 
           <div class="mt-8 flex items-center gap-6 relative z-[10000]">
             <button @click.stop="lbPrev" class="bg-[#bfdbfe] text-[#1e293b] font-fredoka px-6 py-2 rounded-full border-[3px] border-[#1e293b] shadow-[4px_4px_0px_#1e293b] hover:translate-y-[2px] hover:translate-x-[2px] hover:shadow-[2px_2px_0px_#1e293b] transition-all">
@@ -216,21 +225,29 @@ const lightbox = reactive({
   src: '',
   index: 0,
   images: [],
+  zoomed: false,
 })
 
 function openLightbox(category, idx) {
   lightbox.images = category.images
   lightbox.index = idx
   lightbox.src = category.images[idx]
+  lightbox.zoomed = false
   lightbox.active = true
 }
 
+function toggleZoom() {
+  lightbox.zoomed = !lightbox.zoomed
+}
+
 function lbPrev() {
+  lightbox.zoomed = false
   lightbox.index = (lightbox.index - 1 + lightbox.images.length) % lightbox.images.length
   lightbox.src = lightbox.images[lightbox.index]
 }
 
 function lbNext() {
+  lightbox.zoomed = false
   lightbox.index = (lightbox.index + 1) % lightbox.images.length
   lightbox.src = lightbox.images[lightbox.index]
 }
