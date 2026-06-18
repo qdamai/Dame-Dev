@@ -16,7 +16,7 @@
       
       <!-- Folded Page Box -->
       <div 
-        class="relative bg-white border-[4px] border-[#1e293b] shadow-[8px_8px_0px_#1e293b] p-6 md:p-12"
+        class="relative bg-white border-[4px] border-[#1e293b] shadow-[8px_8px_0px_#1e293b] p-6 md:p-12 pb-16 md:pb-20"
         style="clip-path: polygon(0 0, 100% 0, 100% calc(100% - 48px), calc(100% - 48px) 100%, 0 100%);"
       >
         <!-- Folded Corner Flap -->
@@ -27,53 +27,67 @@
         <!-- Section Title (VT323 Pixel Font) -->
         <div class="text-center mb-12">
           <h2 class="font-pixel text-5xl md:text-6xl text-[#1e293b] tracking-widest uppercase inline-block relative">
-            Skills Inventory
-            <!-- Underline highlighter stroke -->
-            <span class="absolute left-0 bottom-1 w-full h-2 bg-[#ffd1dc] -z-10 rounded"></span>
+            <span class="relative z-10">SKILLS INVENTORY</span>
+            <!-- Highlight background span behind the text -->
+            <span class="absolute left-0 bottom-1 w-full h-4 bg-pink-200 -z-10 rounded"></span>
           </h2>
-          <p class="font-quicksand font-bold text-base text-[#475569] mt-3 uppercase tracking-wider">
-            Creative &amp; Technical Capabilities
+          <p class="font-sans font-bold text-xs uppercase tracking-[0.2em] text-[#475569] mt-3">
+            CREATIVE CAPABILITIES
           </p>
         </div>
 
         <!-- Skills Grid Layout -->
-        <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6 pr-6 pb-6">
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8 pr-2 pb-2">
           
           <!-- Skill Items -->
           <div 
-            v-for="skill in skillsList" 
+            v-for="(skill, idx) in creativeSkills" 
             :key="skill.name"
-            class="bg-white border-[3px] border-[#1e293b] rounded-xl p-5 shadow-[4px_4px_0px_#1e293b] transition-transform hover:-translate-y-1"
+            class="bg-white border-2 border-slate-800 rounded-xl p-5 shadow-[4px_4px_0px_#1e293b] transition-transform hover:-translate-y-1 duration-200 flex items-center gap-4"
           >
-            <!-- Header (Icon + Name) -->
-            <div class="flex items-center gap-3 mb-4">
-              <div 
-                class="w-10 h-10 rounded-lg border-2 border-[#1e293b] flex items-center justify-center shadow-[2px_2px_0px_#1e293b]"
-                :style="{ backgroundColor: skill.bgColor }"
-              >
-                <Icon :icon="skill.icon" :color="skill.iconColor" width="24" height="24" />
-              </div>
-              <div>
-                <h3 class="font-fredoka text-lg text-[#1e293b] font-bold leading-tight">
-                  {{ skill.name }}
-                </h3>
-                <span class="font-pixel text-xs text-[#475569] uppercase">
-                  {{ skill.category }}
-                </span>
+            <!-- Left Side: Icon box (alternating bg-pink-100 and bg-sky-100) -->
+            <div 
+              class="w-12 h-12 rounded-xl flex items-center justify-center flex-shrink-0 border-2 border-slate-800"
+              :class="idx % 2 === 0 ? 'bg-pink-100' : 'bg-sky-100'"
+            >
+              <Icon :icon="skill.icon" class="text-slate-800 w-6 h-6" />
+            </div>
+
+            <!-- Right Side: Content -->
+            <div class="flex-grow flex flex-col justify-center">
+              <h3 class="font-fredoka text-base md:text-lg font-bold text-slate-800 leading-tight">
+                {{ skill.name }}
+              </h3>
+              <span class="font-sans text-[10px] font-bold text-slate-500 tracking-wider uppercase mt-0.5">
+                {{ skill.category }}
+              </span>
+              
+              <!-- Stars (Active: text-rose-500, Empty: text-gray-300) -->
+              <div class="flex items-center gap-0.5 mt-2">
+                <template v-for="star in 5" :key="star">
+                  <!-- Active Star -->
+                  <svg 
+                    v-if="star <= skill.rating"
+                    class="w-5 h-5 text-rose-500 fill-current animate-pulse-glow" 
+                    viewBox="0 0 24 24"
+                  >
+                    <polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2" />
+                  </svg>
+                  <!-- Empty Star -->
+                  <svg 
+                    v-else
+                    class="w-5 h-5 text-gray-300 fill-none stroke-current" 
+                    viewBox="0 0 24 24"
+                    stroke-width="2"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                  >
+                    <polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2" />
+                  </svg>
+                </template>
               </div>
             </div>
 
-            <!-- Star Ratings -->
-            <div class="flex items-center gap-1">
-              <Icon 
-                v-for="star in 5" 
-                :key="star" 
-                :icon="star <= skill.rating ? 'solar:star-bold' : 'solar:star-outline'" 
-                width="20" 
-                height="20" 
-                :color="star <= skill.rating ? '#e11d48' : '#cbd5e1'" 
-              />
-            </div>
           </div>
 
         </div>
@@ -87,54 +101,42 @@
 <script setup>
 import { Icon } from '@iconify/vue'
 
-const skillsList = [
-  {
-    name: 'Photoshop',
-    category: 'Design',
-    icon: 'solar:palette-bold-duotone',
-    iconColor: '#1e293b',
-    bgColor: '#ffd1dc', // pink
-    rating: 5
-  },
-  {
-    name: 'After Effects',
-    category: 'Motion',
-    icon: 'solar:videocamera-record-bold-duotone',
-    iconColor: '#1e293b',
-    bgColor: '#aec6cf', // blue
-    rating: 4
-  },
-  {
-    name: 'Premiere Pro',
-    category: 'Video',
-    icon: 'solar:clapperboard-play-bold-duotone',
-    iconColor: '#1e293b',
-    bgColor: '#ffd1dc', // pink
-    rating: 4
-  },
+const creativeSkills = [
   {
     name: 'Canva',
     category: 'Creative',
     icon: 'solar:pen-tool-bold-duotone',
-    iconColor: '#1e293b',
-    bgColor: '#aec6cf', // blue
     rating: 5
   },
   {
-    name: 'Vue.js / Vite',
-    category: 'Frontend',
-    icon: 'solar:code-bold-duotone',
-    iconColor: '#1e293b',
-    bgColor: '#ffd1dc', // pink
+    name: 'IbisPaint X',
+    category: 'Illustration',
+    icon: 'solar:brush-bold-duotone',
     rating: 5
   },
   {
-    name: 'Tailwind CSS',
-    category: 'Styling',
-    icon: 'solar:star-bold-duotone',
-    iconColor: '#1e293b',
-    bgColor: '#aec6cf', // blue
-    rating: 5
+    name: 'Figma',
+    category: 'UI/UX',
+    icon: 'solar:layers-bold-duotone',
+    rating: 4
+  },
+  {
+    name: 'CapCut',
+    category: 'Video',
+    icon: 'solar:clapperboard-play-bold-duotone',
+    rating: 4
+  },
+  {
+    name: 'Photoshop',
+    category: 'Design',
+    icon: 'solar:palette-bold-duotone',
+    rating: 3
+  },
+  {
+    name: 'AI Tools & Prompting',
+    category: 'Productivity',
+    icon: 'solar:magic-stick-3-bold-duotone',
+    rating: 4
   }
 ]
 </script>
