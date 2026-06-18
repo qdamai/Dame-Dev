@@ -23,6 +23,17 @@
         <!-- Inner Dashed Border -->
         <div class="absolute inset-2 border-[2px] border-dashed border-[#1e3a8a]/30 rounded-xl pointer-events-none z-10 hidden md:block"></div>
 
+        <!-- X button acting as Back -->
+        <button
+          @click="goBack"
+          class="absolute top-4 right-4 z-50 w-10 h-10 bg-[#e11d48] rounded-full flex items-center justify-center border-[3px] border-[#1e3a8a] shadow-[2px_2px_0px_#1e3a8a] text-white hover:translate-y-[2px] hover:translate-x-[2px] hover:shadow-none transition-all cursor-pointer"
+          aria-label="Go back"
+        >
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="4" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M18 6L6 18M6 6l12 12" />
+          </svg>
+        </button>
+
         <!-- Cover Image (Top) -->
         <div class="w-full border-b-[4px] border-[#1e3a8a] relative">
           <img
@@ -128,7 +139,7 @@
       >
         <button
           @click="lightboxIndex = null"
-          class="absolute top-5 right-5 w-12 h-12 bg-[#e11d48] rounded-full flex items-center justify-center border-[3px] border-[#1e3a8a] shadow-[4px_4px_0px_#1e3a8a] text-white hover:translate-y-[2px] hover:translate-x-[2px] hover:shadow-[2px_2px_0px_#1e3a8a] transition-all"
+          class="absolute top-5 right-5 z-50 w-12 h-12 bg-[#e11d48] rounded-full flex items-center justify-center border-[3px] border-[#1e3a8a] shadow-[4px_4px_0px_#1e3a8a] text-white hover:translate-y-[2px] hover:translate-x-[2px] hover:shadow-[2px_2px_0px_#1e3a8a] transition-all cursor-pointer"
           aria-label="Close lightbox"
         >
           <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="4" stroke-linecap="round" stroke-linejoin="round">
