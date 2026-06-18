@@ -15,7 +15,7 @@
           I design and build dynamic digital experiences with purpose, precision, and passion. I specialize in crafting interactive user interfaces and bringing custom creative designs to life on the web.
         </p>
         <p class="font-quicksand font-semibold text-base md:text-lg text-[#475569] leading-relaxed">
-          Welcome to my scrapbook portfolio, where I document my digital creations. Feel free to browse my featured works or check out my design folders.
+          Welcome to my scrapbook portofolio, where I document my digital creations. Feel free to browse my featured works or check out my design folders.
         </p>
       </div>
 

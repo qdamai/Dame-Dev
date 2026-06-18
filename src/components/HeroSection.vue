@@ -8,7 +8,7 @@
       <div class="flex">
         <div class="bg-[#f8eed4] border-t-[4px] border-l-[4px] border-r-[4px] border-[#1e293b] rounded-t-xl px-5 py-2 font-pixel text-base md:text-lg text-[#1e293b] translate-y-[4px] relative z-30 flex items-center gap-2">
           <Icon icon="solar:folder-bold-duotone" class="text-[#aec6cf] flex-shrink-0" />
-          <span>DAMAI_PORTFOLIO_Y2K.DIR</span>
+          <span>DAMAI_PORTOFOLIO_Y2K.DIR</span>
         </div>
       </div>
 
@@ -37,9 +37,9 @@
           <!-- Hero Content Inside Folder -->
           <div class="text-center mt-6">
             
-            <!-- Large Styled Portfolio Text -->
+            <!-- Large Styled Portofolio Text -->
             <h1 class="flex flex-wrap justify-center items-baseline gap-1 md:gap-3 mb-6 select-none leading-none">
-              <span class="font-pixel text-6xl md:text-8xl text-[#1e293b] tracking-wider animate-pulse">PORT</span>
+              <span class="font-pixel text-6xl md:text-8xl text-[#1e293b] tracking-wider animate-pulse">PORTO</span>
               <span class="font-cursive-y2k text-7xl md:text-9xl text-[#f497a9] -translate-y-4 md:-translate-y-6 transform rotate-[-4deg] inline-block">folio</span>
             </h1>
 

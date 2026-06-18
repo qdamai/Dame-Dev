@@ -338,7 +338,7 @@
       <!-- Links section at bottom -->
       <div class="border-t-2 border-slate-200 mt-8 pt-6 flex flex-wrap justify-between items-center gap-4 text-xs font-semibold text-slate-500">
         <div>
-          Portfolio: <a href="https://damedev.vercel.app" target="_blank" class="text-sky-600 hover:underline">damedev.vercel.app</a> | 
+          Portofolio: <a href="https://damedev.vercel.app" target="_blank" class="text-sky-600 hover:underline">damedev.vercel.app</a> | 
           GitHub: <a href="https://github.com/qdamai" target="_blank" class="text-slate-700 hover:underline">github.com/qdamai</a>
         </div>
         <div class="text-[10px] font-bold text-slate-400">
@@ -359,20 +359,28 @@ import profilePhoto from '../assets/fotodamai/sidamai.jpeg'
 
 const isGeneratingPDF = ref(false)
 const profilePhotoBase64 = ref('')
+let profilePhotoPromise = null
 
-onMounted(async () => {
-  try {
-    const response = await fetch(profilePhoto)
-    const blob = await response.blob()
-    const reader = new FileReader()
-    reader.onloadend = () => {
-      profilePhotoBase64.value = reader.result
+onMounted(() => {
+  profilePhotoPromise = (async () => {
+    try {
+      const response = await fetch(profilePhoto)
+      const blob = await response.blob()
+      return new Promise((resolve, reject) => {
+        const reader = new FileReader()
+        reader.onloadend = () => {
+          profilePhotoBase64.value = reader.result
+          resolve(reader.result)
+        }
+        reader.onerror = () => reject(new Error('FileReader error'))
+        reader.readAsDataURL(blob)
+      })
+    } catch (err) {
+      console.error('Failed to convert profile image to base64:', err)
+      profilePhotoBase64.value = profilePhoto
+      return profilePhoto
     }
-    reader.readAsDataURL(blob)
-  } catch (err) {
-    console.error('Failed to convert profile image to base64:', err)
-    profilePhotoBase64.value = profilePhoto
-  }
+  })()
 })
 
 const techSkills = [
@@ -434,6 +442,11 @@ const resumeProjects = [
 async function downloadPDF() {
   isGeneratingPDF.value = true
   
+  // Ensure profile photo base64 conversion has completed
+  if (profilePhotoPromise) {
+    await profilePhotoPromise
+  }
+  
   // Wait for DOM updates to apply layout changes (remove shadows/rotations)
   await nextTick()
   
@@ -443,10 +456,10 @@ async function downloadPDF() {
 
     const canvas = await html2canvas(element, {
       scale: 2, // High resolution for A4 quality
-      useCORS: false,
-      allowTaint: false,
+      useCORS: true, // Enable CORS to safely load external web fonts without tainting canvas
+      allowTaint: false, // Keep taint false to ensure canvas is exportable
       backgroundColor: '#FDFBF7',
-      logging: true, // Enabled logging to aid diagnostics if needed
+      logging: true, // Enabled logging to aid diagnostics
       windowWidth: 1024 // Set a stable container viewport width for A4 aspect ratio rendering
     })
     
@@ -479,7 +492,7 @@ async function downloadPDF() {
     pdf.save('Damai_Puti_Afifah_CV.pdf')
   } catch (error) {
     console.error('Error generating PDF:', error)
-    alert('Failed to generate PDF. Please try again.')
+    alert('Failed to generate PDF: ' + (error.message || error))
   } finally {
     isGeneratingPDF.value = false
   }
