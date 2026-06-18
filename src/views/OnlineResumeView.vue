@@ -353,7 +353,7 @@
 <script setup>
 import { ref, computed, nextTick, onMounted } from 'vue'
 import { Icon } from '@iconify/vue'
-import html2canvas from 'html2canvas'
+import html2canvas from 'html2canvas-pro'
 import { jsPDF } from 'jspdf'
 import profilePhoto from '../assets/fotodamai/sidamai.jpeg'
 
