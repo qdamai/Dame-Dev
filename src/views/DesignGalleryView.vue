@@ -34,14 +34,8 @@
         :key="category.name"
         class="folder-section"
       >
-        <!-- Divider with Folder Badge -->
-        <div class="flex items-center gap-4 mb-10 mt-6">
-          <div class="flex items-center gap-2 px-5 py-2.5 bg-[#bfdbfe] text-[#1e293b] font-fredoka text-lg md:text-xl rounded-xl border-[3px] border-[#1e293b] shadow-[4px_4px_0px_#1e293b] relative z-10 font-pixel">
-            <Icon icon="solar:folder-open-bold-duotone" width="28" height="28" class="text-[#e11d48]" />
-            <span>{{ category.label }}</span>
-          </div>
-          <div class="h-[3px] bg-[#1e293b] border-dashed border-t-[3px] flex-1"></div>
-        </div>
+        <!-- Section Divider -->
+        <div class="border-t-[4px] border-[#1e293b] border-dashed w-full mb-12 mt-8"></div>
 
         <!-- VIDEO GRID -->
         <div v-if="category.videos.length > 0" class="flex flex-wrap justify-center items-start gap-8 mb-10 max-w-5xl mx-auto">
