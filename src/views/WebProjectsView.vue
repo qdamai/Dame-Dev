@@ -33,15 +33,21 @@
               </p>
             </div>
 
-            <!-- Strict 1 / 2 / 3 column grid — no auto-fill overflow -->
-            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 pb-8 relative z-10">
-              <ProjectCard
+            <!-- Custom 2-1-2-1 column grid -->
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-8 pb-8 relative z-10">
+              <div
                 v-for="(project, index) in projects"
                 :key="project.id"
-                :project="project"
-                :index="index"
-                @open="openProject(project)"
-              />
+                :class="index % 3 === 2 ? 'md:col-span-2 flex justify-center' : ''"
+              >
+                <ProjectCard
+                  :project="project"
+                  :index="index"
+                  class="w-full"
+                  :class="index % 3 === 2 ? 'md:w-[80%] lg:w-[50%]' : ''"
+                  @open="openProject(project)"
+                />
+              </div>
             </div>
             
           </div>
