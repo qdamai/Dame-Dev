@@ -75,7 +75,7 @@
           :class="isGeneratingPDF ? '' : 'shadow-[4px_4px_0px_#1e293b] rotate-[-2deg]'"
         >
           <img 
-            :src="profilePhoto" 
+            :src="profilePhotoBase64 || profilePhoto" 
             alt="Damai Puti Afifah" 
             class="w-full h-full object-cover object-center"
           />
@@ -351,13 +351,29 @@
 </template>
 
 <script setup>
-import { ref, computed, nextTick } from 'vue'
+import { ref, computed, nextTick, onMounted } from 'vue'
 import { Icon } from '@iconify/vue'
 import html2canvas from 'html2canvas'
 import { jsPDF } from 'jspdf'
 import profilePhoto from '../assets/fotodamai/sidamai.jpeg'
 
 const isGeneratingPDF = ref(false)
+const profilePhotoBase64 = ref('')
+
+onMounted(async () => {
+  try {
+    const response = await fetch(profilePhoto)
+    const blob = await response.blob()
+    const reader = new FileReader()
+    reader.onloadend = () => {
+      profilePhotoBase64.value = reader.result
+    }
+    reader.readAsDataURL(blob)
+  } catch (err) {
+    console.error('Failed to convert profile image to base64:', err)
+    profilePhotoBase64.value = profilePhoto
+  }
+})
 
 const techSkills = [
   'JavaScript', 'TypeScript', 'Python', 'Vue.js', 'React Native', 
@@ -428,9 +444,9 @@ async function downloadPDF() {
     const canvas = await html2canvas(element, {
       scale: 2, // High resolution for A4 quality
       useCORS: false,
-      allowTaint: true,
+      allowTaint: false,
       backgroundColor: '#FDFBF7',
-      logging: false,
+      logging: true, // Enabled logging to aid diagnostics if needed
       windowWidth: 1024 // Set a stable container viewport width for A4 aspect ratio rendering
     })
     
