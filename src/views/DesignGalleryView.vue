@@ -1,27 +1,32 @@
 <template>
-  <div class="w-full bg-pink-checkerboard pb-16 relative z-10">
+  <div class="w-full bg-[#fff8eb] pb-24 relative z-10">
 
     <!-- Scalloped transition from Cream to Pink -->
     <div class="scalloped-top-pink"></div>
 
-    <!-- Page Header -->
-    <div class="px-4 md:px-8 pt-10 pb-10 max-w-7xl mx-auto">
-      <div class="text-center mb-2">
-        <h1 class="font-serif text-4xl md:text-5xl font-bold inline-block relative" style="color: var(--text-dark-brown)">
-          Design Gallery
-          <span
-            class="absolute left-0 bottom-0 w-full h-3 bg-white/60 -z-10 rounded translate-y-1"
-            aria-hidden="true"
-          ></span>
-        </h1>
+    <!-- Page Header (Nested Scrapbook Borders) -->
+    <div class="px-4 md:px-8 pt-12 pb-6 max-w-5xl mx-auto relative z-20">
+      <div class="w-full border-[6px] md:border-[8px] border-[#1e3a8a] bg-[#fce7ec] p-2 shadow-[6px_6px_0px_#1e3a8a] relative">
+        <div class="border-[3px] border-[#e1959c] p-2 w-full">
+          <div class="border-[3px] border-white p-6 md:p-10 w-full bg-pattern-mini-love flex flex-col items-center text-center">
+            <h1 class="font-fredoka text-4xl md:text-5xl font-bold text-[#1e3a8a] relative inline-block">
+              Design Gallery
+              <!-- Inline highlighter stroke under the heading -->
+              <span
+                class="absolute left-1/2 bottom-0 w-[110%] h-3 bg-white/70 -z-10 rounded -translate-x-1/2 translate-y-2 -rotate-1"
+                aria-hidden="true"
+              ></span>
+            </h1>
+            <p class="font-quicksand text-lg md:text-xl text-[#1e3a8a] font-bold bg-white/60 px-4 py-1.5 rounded-full mt-6 border-[2px] border-[#1e3a8a] border-dashed">
+              A collection of my graphic design work, sorted by folder
+            </p>
+          </div>
+        </div>
       </div>
-      <p class="text-center font-cursive text-xl mt-4 leading-relaxed" style="color: var(--text-muted)">
-        A collection of my graphic design work, sorted by folder.
-      </p>
     </div>
 
     <!-- Gallery Sections -->
-    <div class="px-4 md:px-8 max-w-7xl mx-auto space-y-20">
+    <div class="px-4 md:px-8 max-w-5xl mx-auto space-y-20 mt-8">
 
       <!-- Render each category -->
       <section
@@ -29,9 +34,13 @@
         :key="category.name"
         class="folder-section"
       >
-        <!-- Divider (No Title) -->
-        <div class="flex items-center gap-4 mb-10 mt-4">
-          <div class="h-px bg-gray-200 flex-1"></div>
+        <!-- Divider with Folder Badge -->
+        <div class="flex items-center gap-4 mb-10 mt-6">
+          <div class="flex items-center gap-2 px-5 py-2.5 bg-[#bfdbfe] text-[#1e3a8a] font-fredoka text-lg md:text-xl rounded-xl border-[3px] border-[#1e3a8a] shadow-[4px_4px_0px_#1e3a8a] relative z-10">
+            <Icon icon="solar:folder-open-bold-duotone" width="28" height="28" class="text-[#e11d48]" />
+            <span>{{ category.label }}</span>
+          </div>
+          <div class="h-[3px] bg-[#1e3a8a] border-dashed border-t-[3px] flex-1"></div>
         </div>
 
         <!-- VIDEO GRID -->
@@ -39,9 +48,12 @@
           <div
             v-for="(src, vi) in category.videos"
             :key="vi"
-            class="scrapbook-card w-full sm:w-[calc(50%-1rem)] lg:w-[calc(33.333%-1.333rem)]"
+            class="scrapbook-card w-full sm:w-[calc(50%-1rem)] lg:w-[calc(33.333%-1.333rem)] relative"
           >
-            <div class="relative w-full overflow-hidden rounded border border-[#4a2c2c]/10 bg-black">
+            <!-- Washi/Masking Tape -->
+            <div class="masking-tape" style="left: 50%; transform: translateX(-50%) rotate(1deg); top: -14px;"></div>
+            
+            <div class="relative w-full overflow-hidden rounded-lg border-2 border-[#1e3a8a] bg-black">
               <video
                 :src="src"
                 controls
@@ -64,9 +76,12 @@
             :key="idx"
             class="relative group w-full sm:w-[calc(50%-1rem)] lg:w-[calc(33.333%-1.333rem)]"
           >
-            <div class="scrapbook-card transition-transform duration-300" :class="idx % 2 === 0 ? 'rotate-1 hover:rotate-0' : '-rotate-1 hover:rotate-0'">
+            <div class="scrapbook-card transition-transform duration-300 relative" :class="idx % 2 === 0 ? 'rotate-1 hover:rotate-0' : '-rotate-1 hover:rotate-0'">
+              <!-- Washi/Masking Tape -->
+              <div class="masking-tape" style="left: 50%; transform: translateX(-50%) rotate(-2deg); top: -14px;"></div>
+              
               <!-- Image Container: w-full h-auto for original aspect ratio -->
-              <div class="relative w-full overflow-hidden rounded border border-[#4a2c2c]/10 cursor-pointer" @click="openLightbox(category, idx)">
+              <div class="relative w-full overflow-hidden rounded-lg border-2 border-[#1e3a8a] cursor-pointer" @click="openLightbox(category, idx)">
                 <img
                   :src="src"
                   :alt="`design ${idx + 1}`"
@@ -76,9 +91,9 @@
 
                 <!-- Hover overlay -->
                 <div
-                  class="absolute inset-0 bg-[var(--text-dark-brown)]/30 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center"
+                  class="absolute inset-0 bg-[#1e3a8a]/40 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center"
                 >
-                  <span class="pill-btn pointer-events-none text-sm" style="border-color: var(--bg-cream)">
+                  <span class="bg-white text-[#1e3a8a] font-fredoka text-sm px-4 py-2 rounded-full border-[3px] border-[#1e3a8a] shadow-[2px_2px_0px_#1e3a8a] pointer-events-none">
                     View Full Image
                   </span>
                 </div>
@@ -103,15 +118,16 @@
       <transition name="modal">
         <div
           v-if="lightbox.active"
-          class="fixed inset-0 z-[300] bg-black/90 flex flex-col items-center justify-center p-4"
+          class="fixed inset-0 z-[9999] bg-black/90 flex flex-col items-center justify-center p-4 backdrop-blur-sm"
           @click.self="lightbox.active = false"
         >
           <button
-            @click="lightbox.active = false"
-            class="absolute top-5 right-5 text-white/70 hover:text-white"
+            @click.stop="lightbox.active = false"
+            class="absolute top-5 right-5 w-12 h-12 bg-[#e11d48] rounded-full flex items-center justify-center border-[3px] border-[#1e3a8a] shadow-[4px_4px_0px_#1e3a8a] text-white hover:translate-y-[2px] hover:translate-x-[2px] hover:shadow-[2px_2px_0px_#1e3a8a] transition-all cursor-pointer pointer-events-auto"
             aria-label="Close lightbox"
+            style="z-index: 10000;"
           >
-            <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="4" stroke-linecap="round" stroke-linejoin="round">
               <path d="M18 6L6 18M6 6l12 12" />
             </svg>
           </button>
@@ -119,17 +135,17 @@
           <img
             :src="lightbox.src"
             alt="Full size design"
-            class="max-w-full max-h-[82vh] object-contain rounded-lg shadow-2xl"
+            class="max-w-full max-h-[78vh] object-contain rounded-xl shadow-[8px_8px_0px_rgba(30,58,138,0.5)] border-[4px] border-[#1e3a8a] bg-white relative z-[10000]"
           />
 
-          <div class="mt-5 flex items-center gap-4">
-            <button @click="lbPrev" class="pill-btn pill-btn-outline" style="border-color: white; color: white;">
+          <div class="mt-8 flex items-center gap-6 relative z-[10000]">
+            <button @click.stop="lbPrev" class="bg-[#bfdbfe] text-[#1e3a8a] font-fredoka px-6 py-2 rounded-full border-[3px] border-[#1e3a8a] shadow-[4px_4px_0px_#1e3a8a] hover:translate-y-[2px] hover:translate-x-[2px] hover:shadow-[2px_2px_0px_#1e3a8a] transition-all">
               Previous
             </button>
-            <span class="font-sans text-white/70 tabular-nums text-sm">
+            <span class="font-fredoka text-white text-xl bg-[#1e3a8a] px-4 py-1 rounded-full border-[2px] border-white/20">
               {{ lightbox.index + 1 }} / {{ lightbox.images.length }}
             </span>
-            <button @click="lbNext" class="pill-btn pill-btn-outline" style="border-color: white; color: white;">
+            <button @click.stop="lbNext" class="bg-[#bfdbfe] text-[#1e3a8a] font-fredoka px-6 py-2 rounded-full border-[3px] border-[#1e3a8a] shadow-[4px_4px_0px_#1e3a8a] hover:translate-y-[2px] hover:translate-x-[2px] hover:shadow-[2px_2px_0px_#1e3a8a] transition-all">
               Next
             </button>
           </div>
@@ -146,6 +162,7 @@
 
 <script setup>
 import { reactive, computed } from 'vue'
+import { Icon } from '@iconify/vue'
 import AppFooter from '../components/AppFooter.vue'
 
 // ─── 1. IMPORT ALL IMAGES & VIDEOS via Vite glob ───────────────────────────

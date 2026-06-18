@@ -147,10 +147,10 @@ body {
 
 /* ─── SCRAPBOOK CARD ─── */
 .scrapbook-card {
-  background: var(--bg-cream);
-  border: 1px solid rgba(74, 44, 44, 0.15); /* Subtle dark-brown border */
-  border-radius: 4px;
-  box-shadow: var(--shadow-scrapbook);
+  background: #fffcf8;
+  border: 3px solid #1e3a8a;
+  border-radius: 12px;
+  box-shadow: 6px 6px 0px #1e3a8a;
   position: relative;
   margin-top: 24px; /* Space for washi tape */
   padding: 16px; /* Generous polaroid white padding */
@@ -158,7 +158,8 @@ body {
 }
 
 .scrapbook-card:hover {
-  box-shadow: var(--shadow-scrapbook-hover);
+  transform: translateY(-2px);
+  box-shadow: 8px 8px 0px #1e3a8a;
 }
 
 /* ─── WASHI TAPE ─── */
@@ -169,8 +170,8 @@ body {
   width: 85px;
   height: 28px;
   background-color: rgba(244, 151, 169, 0.85); /* Darker pastel pink washi tape */
-  border: 1px solid rgba(74, 44, 44, 0.1);
-  box-shadow: 0 2px 4px rgba(74, 44, 44, 0.08);
+  border: 1.5px solid #1e3a8a;
+  box-shadow: 2px 2px 0px #1e3a8a;
   z-index: 2;
   mix-blend-mode: multiply; /* Gives it a realistic translucent tape effect */
   /* Jagged tear edges */
@@ -182,34 +183,34 @@ body {
   display: inline-flex;
   align-items: center;
   gap: 8px;
-  padding: 10px 24px;
+  padding: 10px 20px;
   border-radius: 9999px;
-  background: var(--text-dark-brown);
-  color: var(--bg-cream);
-  font-family: var(--font-sans);
+  background: #bfdbfe; /* baby blue */
+  color: #1e3a8a;
+  font-family: 'Fredoka', sans-serif;
   font-weight: 600;
   font-size: 14px;
   text-decoration: none;
-  border: 1.5px solid var(--text-dark-brown);
+  border: 3px solid #1e3a8a;
   cursor: pointer;
   transition: transform 0.2s ease, box-shadow 0.2s ease, background 0.2s ease, color 0.2s ease;
-  box-shadow: 0 2px 6px rgba(74, 44, 44, 0.15);
+  box-shadow: 4px 4px 0px #1e3a8a;
   white-space: nowrap;
 }
 
 .pill-btn:hover {
-  transform: translateY(-2px);
-  box-shadow: 0 5px 14px rgba(74, 44, 44, 0.2);
+  transform: translateY(2px) translateX(2px);
+  box-shadow: 2px 2px 0px #1e3a8a;
 }
 
 .pill-btn-outline {
-  background: transparent;
-  color: var(--text-dark-brown);
+  background: #fbcfe8; /* pink pastel */
+  color: #1e3a8a;
 }
 
 .pill-btn-outline:hover {
-  background: var(--text-dark-brown);
-  color: var(--bg-cream);
+  background: #e11d48; /* cherry red */
+  color: white;
 }
 
 /* ─── PAGE TRANSITIONS ─── */
