@@ -75,7 +75,7 @@ export const projects = [
     lessons: 'Gained practical experience with Electron and local JSON databases.',
     link: null,
     linkLabel: null,
-    images: getImagesFor('forestry', 'Forestry+App')
+    images: getImagesFor('buku-tamu-dinas-kehutanan', 'Forestry+App')
   },
   {
     id: 'keyboard',
