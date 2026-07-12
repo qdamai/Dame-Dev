@@ -196,7 +196,7 @@ function extractFolderName(path) {
   const parts = path.split('/')
   const designIdx = parts.findIndex(p => p === 'design')
   if (designIdx === -1 || designIdx + 1 >= parts.length - 1) return null
-  return parts.slice(designIdx + 1, -1).join(' / ')
+  return parts[parts.length - 2]
 }
 
 function buildFolderMap(glob) {
