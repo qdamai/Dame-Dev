@@ -5,7 +5,7 @@
       
       <!-- Side 1: About Me Title Heading -->
       <div class="text-center md:text-left md:w-1/2">
-        <h2 class="font-cursive-y2k text-7xl md:text-8xl text-[#f497a9] transform -rotate-[4deg] leading-none mb-6 select-none">
+        <h2 class="font-fredoka text-6xl md:text-7xl font-bold text-[#f497a9] transform -rotate-[4deg] leading-none mb-6 select-none">
           About Me
         </h2>
         <h3 class="font-fredoka text-2xl text-[#1e293b] mb-4">

@@ -4,11 +4,11 @@
 :root {
   /* Colors */
   --bg-cream: #FDFBF7; /* Off-white paper base */
-  --bg-baby-blue: #AEC6CF; /* Soft Blue Y2K */
-  --bg-bubblegum-pink: #FFD1DC; /* Soft Pink Y2K */
+  --bg-baby-blue: #AEC6CF; /* Soft Blue */
+  --bg-bubblegum-pink: #FFD1DC; /* Soft Pink */
   --bg-darker-pink: #F497A9;
   
-  --text-dark-brown: #1E293B; /* slate-800 for Y2K high-contrast */
+  --text-dark-brown: #1E293B; /* slate-800 for high-contrast */
   --text-muted: #475569; /* slate-600 */
 
   /* Typography */
@@ -44,9 +44,7 @@ body {
 .font-cursive {
   font-family: var(--font-cursive);
 }
-.font-cursive-y2k {
-  font-family: 'Great Vibes', cursive;
-}
+
 .font-pixel {
   font-family: 'VT323', monospace;
 }

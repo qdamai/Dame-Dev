@@ -47,12 +47,12 @@ import { Icon } from '@iconify/vue'
 }
 
 .nav-link:hover {
-  background-color: #ffd1dc; /* Soft Pink Y2K */
+  background-color: #ffd1dc; /* Soft Pink */
   color: #1e293b;
 }
 
 .nav-active {
-  background-color: #aec6cf; /* Soft Blue Y2K */
+  background-color: #aec6cf; /* Soft Blue */
   color: #1e293b !important;
   border: 2px solid #1e293b;
   box-shadow: 2px 2px 0px #1e293b;

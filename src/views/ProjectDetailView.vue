@@ -41,7 +41,7 @@
             PROJECT FILE
           </div>
           <div class="absolute bottom-4 right-6 bg-[#ffd1dc]/90 border-2 border-[#1e293b] py-1 px-4 text-xs font-pixel tracking-wider text-[#1e293b] rotate-[3deg] shadow-[2px_2px_0px_#1e293b] select-none">
-            {{ project.id.toUpperCase() }} // Y2K
+            {{ project.id.toUpperCase() }}
           </div>
 
           <!-- Type label -->
@@ -57,10 +57,6 @@
             {{ project.title }}
           </h2>
 
-          <!-- Role Label -->
-          <p class="font-cursive-y2k text-3xl md:text-4xl text-[#e11d48] mt-4 rotate-[-1deg]">
-            {{ project.role }}
-          </p>
         </div>
 
         <!-- Title & Details -->

@@ -47,7 +47,7 @@
       <div class="h-[2px] bg-[#1e293b]/20 mb-6 mx-auto max-w-xs"></div>
 
       <p class="text-xs font-quicksand font-bold tracking-wider text-[#1e293b]/70">
-        Built with Vue 3, Vite &amp; Tailwind CSS &nbsp;|&nbsp; &copy; {{ year }} All Rights Reserved
+        &copy; {{ year }} All Rights Reserved
       </p>
     </div>
   </footer>
