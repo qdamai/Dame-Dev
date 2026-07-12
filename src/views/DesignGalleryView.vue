@@ -35,7 +35,14 @@
         class="folder-section"
       >
         <!-- Section Divider -->
-        <div class="border-t-[4px] border-[#1e293b] border-dashed w-full mb-12 mt-8"></div>
+        <div class="relative flex items-center justify-center w-full mb-12 mt-8">
+          <div class="absolute inset-0 flex items-center">
+            <div class="w-full border-t-[4px] border-[#1e293b] border-dashed"></div>
+          </div>
+          <div class="relative bg-[#ffd1dc] px-6 py-2 border-[3px] border-[#1e293b] rounded-full font-pixel text-sm md:text-base text-[#1e293b] shadow-[4px_4px_0px_#1e293b] z-10 transform -rotate-1">
+            {{ category.label }}
+          </div>
+        </div>
 
         <!-- VIDEO GRID -->
         <div v-if="category.videos.length > 0" class="flex flex-wrap justify-center items-start gap-8 mb-10 max-w-5xl mx-auto">
@@ -185,11 +192,11 @@ const videoGlob = import.meta.glob(
 // ─── 2. PROCESS INTO CATEGORISED ARRAYS ────────────────────────────────────
 
 function extractFolderName(path) {
-  // path looks like:  ../assets/design/ukuran a/a (1).jpg
+  // path looks like:  ../assets/design/bundle design/KATALOG CAOSMIC/1.png
   const parts = path.split('/')
   const designIdx = parts.findIndex(p => p === 'design')
   if (designIdx === -1 || designIdx + 1 >= parts.length - 1) return null
-  return parts[designIdx + 1]  // e.g. "ukuran a"
+  return parts.slice(designIdx + 1, -1).join(' / ')
 }
 
 function buildFolderMap(glob) {
