@@ -18,7 +18,7 @@
               ></span>
             </h1>
             <p class="font-quicksand text-lg md:text-xl text-[#1e293b] font-bold bg-white/60 px-6 py-2.5 rounded-full mt-6">
-              A collection of my graphic design work, sorted by folder
+              A collection of my graphic design work
             </p>
           </div>
         </div>
@@ -80,6 +80,7 @@
                   :src="src"
                   :alt="`design ${idx + 1}`"
                   loading="lazy"
+                  decoding="async"
                   class="w-full h-auto block transition-transform duration-500 group-hover:scale-105"
                 />
 
