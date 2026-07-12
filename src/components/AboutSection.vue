@@ -61,7 +61,7 @@
             </div>
 
             <p class="font-quicksand text-sm text-[#475569] font-semibold mt-4 max-w-xs mx-auto border-t-[2px] border-dashed border-[#1e293b]/20 pt-4 leading-relaxed">
-              Passionate about UI engineering, accessibility, and modern interactive styling.
+              Creative specialist passionate about graphic design, content creation, and crafting engaging visual experiences.
             </p>
 
             <!-- Social Lanyard Connections -->
